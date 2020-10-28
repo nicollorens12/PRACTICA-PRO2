@@ -1,0 +1,47 @@
+FUNCIONES:
+
+bool es_valido(int size, int "pos"){
+	//Pre: Ubicacion cierta
+	//Post: retorna si hi cap un contenidor de tamany size a la posicio indicada
+}
+
+// MODIFICADORES
+
+void inserta_contendedor(...)
+void retira_contendedor(...)
+
+NO SE RECOLOCAN CONTENDORES PARA VER INTENTAR QUE QUEPA UN CONTENEDOR NUEVO, SI NO CABE N0 CABE Y PUNTO ---> VA AL AREA PROVISIONAL
+
+"POS" es una terna de x,y,z la cual apunta al y menor es decir de izquierda a derecha
+
+Depues de cualquier operacion modificadora del conjunto de contendores AKA terminal se revisan los espacios libres para meter contenedores en el area de espera
+
+FUNCION BEST_FIT
+
+1. Qué hueco elegir para un contenedor si hay varias posibilidades
+
+	Si quiero colocar un contenedor de size = 2
+	Busca espacios de 2, si no encuentra de 3, si no encuentra de 4, etc... (def hasta que size de hueco busca)
+	
+	!! NO REORGANIZA PARA ENCAJAR CONTENEDORES NUEVOS
+	
+
+2. Cómo gestionar el área de espera.
+
+	AREA DE ESPERA:
+
+	Implementacion: es un stack o pila ya que last in, first out. Esta la unica regla del area de espera. OJO CON ESTA IMPLEMENTACION YA QUE HAY QUE PODER ACCEDER 
+
+	Cada vez que se ejecute void inserta_contendedor(...) recorre el area de espera para ver que contenedores se pueden meter
+
+	// USAREMOS UN STACK/PILA PARA LA IMPLEMENTACION DE LA TERMINAL DE ESPERA, LAST IN, FIRST OUT
+
+	Cuando se ejecute el metodo void retira_contendedor(...) todos los contenedores que impidan la extraccion del contenedor que queremos sacar iran a 
+	la area de espera. Al acabar, recorre el area de espera para ver que contenedores se pueden meter 
+
+FUNCIONALIDADES: 
+
+AREA: Asumimos que siempre es correcta la creacion del area
+
+AREA DE ESPERA: La localizacion de los contenedores en el area de espera sera (-1,0,0)
+

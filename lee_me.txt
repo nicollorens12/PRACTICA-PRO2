@@ -1,0 +1,8 @@
+Para ayudaros en la especificación y diseño de la práctica, os incluimos
+algunas clases sencillas extraídas del enunciado: Contenedor, Ubicacion y
+Segmento.
+
+Las clases Contenedor y Ubicacion han de usarse obligatoriamente en el
+diseño de la práctica. La clase Segmento es de uso opcional.
+
+Más adelante os proporcionaremos los correspondientes .cc.
