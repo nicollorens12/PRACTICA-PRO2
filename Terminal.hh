@@ -5,9 +5,13 @@
 #ifndef _TERMINAL
 #define _TERMINAL
 
-#include <Segmento.hh>
-#include <Contenedor.hh>
+#include "Segmento.hh"
+#include "Contenedor.hh"
+#include "Hilera.hh"
+
+#ifndef NO_DIAGRAM
 #include <map>
+#endif
 
 using namespace std;
 
@@ -44,7 +48,7 @@ Terminal(int n, int m, int h);
       \pre <em>Cert</em>
       \post El resultat és la terna <N,M,H>
 */
-Ubicacion size();
+Ubicacion t_size();
 
 /** @brief Consultora del tamany N (N = cantidad de plazas)
       \pre <em>Cert</em>
@@ -58,17 +62,25 @@ int plazas() const;
 */
 int filas() const;
 
-/** @brief Consultora del tamany H (H = altura maxima en una fila)
+/** @brief Consultora de l'altura maxima del terminal
       \pre <em>Cert</em>
-      \post Retorna la altura maxima d'una fila
+      \post Retorna el enter H
 */
-int altura(int m) const;
+int altura() const;
 
 /** @brief Consultora de si una ubicacio te tamany l lliure
       \pre <em>Ubicacion certa</em>
       \post retorna si hi cap un contenidor de tamany l a la posicio indicada
 */
 bool es_valid(Ubicacion pos,int l);
+
+/** @brief Consultora de la ubicacio del contenidor amb matricula m, si es buit retorna (-1,-1,-1) y 
+ *          si es al area de espera retorna (-1,0,0)
+      \pre <em>Cert</em>
+      \post Retorna la ubicacio del contenidor
+*/
+Ubicacion ubi(string m);
+
 
 
 
@@ -134,6 +146,13 @@ void area_espera();
 */
 void contenedores();
 
+/** @brief Imprimeix la matricula del contenidor que ocupa la posicio (i,j,k) si es buida, no s'imprimeix res, 
+ *          si no es valida s'imprimeix error
+      \pre <em>Cert</em>
+      \post Retorna la posicio
+*/
+void contenedor_ocupa(Ubicacion u);
+
 /** @brief Imprimeix l'area principal utilitzant la lletra inicial de m de forma bidimensional per fileres en ordre ascendent indicant pis i plaça
       \pre <em>Terminal creada</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
@@ -150,6 +169,8 @@ private:
 
 map <string,Segmento> t;
 int n,m,h;
+vector <Hilera> v;
+vector<Contenedor> t_e
 
 };
 #endif
