@@ -8,14 +8,12 @@
 #include "Segmento.hh"
 #include "Contenedor.hh"
 #include "Hilera.hh"
-
-#ifndef NO_DIAGRAM
-#include <map>
-#endif
+#include "Area_espera.hh"
+#include "Cjt_contenidors.hh"
 
 using namespace std;
 
-class Terminal {
+class Magatzem {
     public:
 
 //Constructores
@@ -167,10 +165,10 @@ void huecos();
 
 private:
 
-map <string,Segmento> t;
+Cjt_contenidors contenidors;
 int n,m,h;
 vector <Hilera> v;
-vector<Contenedor> t_e;
+A_espera a_espera;
 
 };
 #endif

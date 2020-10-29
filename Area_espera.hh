@@ -1,13 +1,13 @@
-/** @file Terminal.hh
-    @brief Especificació de la classe Terminal 
+/** @file Area_Espera.hh
+    @brief Especificació de la classe Area_Espera 
 */
 
-#ifndef _TERMINAL_ESPERA
-#define _TERMINAL_ESPERA
+#ifndef _AREA_ESPERA
+#define _AREA_ESPERA
 
-#include <Contenedor.hh>
+#include "Contenedor.hh"
 #ifndef NO_DIAGRAM
-#include <map>
+#include <vector>
 #endif
 
 using namespace std;
@@ -36,12 +36,10 @@ T_espera(); //CAL? No se si es dona el cas d'una creacio de terminal sense argum
 //Consultores
 
 //Modificadores
-void 
-
 
 private:
 
-map<string,int l> t_e;
+    vector<Contenedor> area_e;
 
 };
 #endif
