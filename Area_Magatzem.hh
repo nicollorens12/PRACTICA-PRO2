@@ -22,13 +22,13 @@ class Magatzem {
       \pre <em>Cert</em>
       \post El resultat és un terminal amb N,M,H = 0
 */ 
-Terminal(); //CAL? No se si es dona el cas d'una creacio de terminal sense arguments
+Magatzem(); //CAL? No se si es dona el cas d'una creacio de terminal sense arguments
 
 /** @brief Creadora amb arguments
       \pre <em>Cert</em>
       \post El resultat és un terminal amb N,M,H > 0
 */ 
-Terminal(int n, int m, int h);
+Magatzem(int n, int m, int h);
 
 
 //Destructora
@@ -37,7 +37,7 @@ Terminal(int n, int m, int h);
       \pre <em>Cert</em>
       \post Destrueix un objecte Terminal
 */  
-~Terminal();
+~Magatzem();
 
 
 //Consultores
@@ -72,26 +72,26 @@ int altura() const;
 */
 bool es_valid(Ubicacion pos,int l);
 
-/** @brief Consultora de la ubicacio del contenidor amb matricula m, si es buit retorna (-1,-1,-1) y 
- *          si es al area de espera retorna (-1,0,0)
-      \pre <em>Cert</em>
-      \post Retorna la ubicacio del contenidor
-*/
-Ubicacion ubi(string m);
-
-
 
 
 //Operadors
 
-/** @brief Inserta un contenidor en el terminal principal
-      \pre <em>Contenidor valid</em>
-      \post Si el contenidor ja existeix s'imprimeix un ERROR altrament si el contenidor te lloc al terminal principal 
-            s'imprimira la seva posicio,si s'ha hagut d'afegir a la terminal d'espera s'imprimira (-1,0,0)
+/** @brief Inserta un contenidor al terminal 
+      \pre <em>Cert</em>
+      \post El contenidor s'ha afegit al cjt i a la matriu/llista
 */
 void inserta_contenedor(string m, int l); // ADMENT COM A COMANDA i
 
-/** @brief Elimina un contenidor del terminal principal
+/* 
+PASOS INSERTAR
+
+1. Mira si la matricula es valida
+2. Busca on posar el contenedor (terna i j k)
+3. Afegeix el contenidor al mapa Cjt_estudiants
+4. Afegeix el contenidor al area de magatzem
+*/
+
+/** @brief Elimina un contenidor al terminal
       \pre <em>Contenidor valid</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */

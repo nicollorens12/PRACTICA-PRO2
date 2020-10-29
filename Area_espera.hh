@@ -7,12 +7,12 @@
 
 #include "Contenedor.hh"
 #ifndef NO_DIAGRAM
-#include <vector>
+#include <list>
 #endif
 
 using namespace std;
 
-class T_espera {
+class A_espera {
     public:
 
 //Constructores
@@ -21,7 +21,7 @@ class T_espera {
       \pre <em>Cert</em>
       \post El resultat és un terminal d'espera
 */ 
-T_espera(); //CAL? No se si es dona el cas d'una creacio de terminal sense arguments
+A_espera(); //CAL? No se si es dona el cas d'una creacio de terminal sense arguments
 
 
 //Destructora
@@ -30,7 +30,7 @@ T_espera(); //CAL? No se si es dona el cas d'una creacio de terminal sense argum
       \pre <em>Cert</em>
       \post Destrueix un objecte Terminal d'espera
 */  
-~T_espera();
+~A_espera();
 
 
 //Consultores
@@ -39,7 +39,7 @@ T_espera(); //CAL? No se si es dona el cas d'una creacio de terminal sense argum
 
 private:
 
-    vector<Contenedor> area_e;
+    list l_espera;
 
 };
 #endif
