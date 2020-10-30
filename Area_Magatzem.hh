@@ -8,41 +8,38 @@
 #include "Segmento.hh"
 #include "Contenedor.hh"
 #include "Hilera.hh"
-#include "Area_espera.hh"
-#include "Cjt_contenidors.hh"
+#include "Area_Espera.hh"
+#include "Cjt_Contenidors.hh"
 
 using namespace std;
 
-class Magatzem {
+/** @class Area_Magatzem
+    @brief Representa el area de magatzem del terminal
+*/
+class Area_Magatzem {
     public:
 
 //Constructores
 
-/** @brief Creadora sense arguments
-      \pre <em>Cert</em>
-      \post El resultat és un terminal amb N,M,H = 0
-*/ 
-Magatzem(); //CAL? No se si es dona el cas d'una creacio de terminal sense arguments
-
 /** @brief Creadora amb arguments
       \pre <em>Cert</em>
-      \post El resultat és un terminal amb N,M,H > 0
+      \post  El resultat és un area magatzem amb N,M,H > 0 i una area d'esepera
 */ 
-Magatzem(int n, int m, int h);
+Area_Magatzem(int n, int m, int h);
 
 
 //Destructora
 
 /** @brief Destructora
       \pre <em>Cert</em>
-      \post Destrueix un objecte Terminal
+      \post Destrueix un objecte Magatzem
 */  
-~Magatzem();
+~Area_Magatzem();
 
 
 //Consultores
 
-/** @brief Consultora del tamany total (N,M,H) del terminal
+/** @brief Consultora del tamany total (N,M,H) del area magatzem
       \pre <em>Cert</em>
       \post El resultat és la terna <N,M,H>
 */
@@ -60,7 +57,7 @@ int plazas() const;
 */
 int filas() const;
 
-/** @brief Consultora de l'altura maxima del terminal
+/** @brief Consultora de l'altura maxima del area magatzem
       \pre <em>Cert</em>
       \post Retorna el enter H
 */
@@ -73,12 +70,19 @@ int altura() const;
 bool es_valid(Ubicacion pos,int l);
 
 
+/** @brief Busca el millor lloc per afegir un contenidor al area magatzem
+      \pre <em>Cert</em>
+      \post S'ha retornat la posicio i la longitud del lloc que s'ha trobat, si no s'ha trobat cap retorna un segment amb l = 0;
+*/
+Segmento best_fit(vector<Hilera> v);
+
+
 
 //Operadors
 
 /** @brief Inserta un contenidor al terminal 
       \pre <em>Cert</em>
-      \post El contenidor s'ha afegit al cjt i a la matriu/llista
+      \post El contenidor s'ha afegit al cjt i a la matriu/llista i 
 */
 void inserta_contenedor(string m, int l); // ADMENT COM A COMANDA i
 
@@ -91,8 +95,8 @@ PASOS INSERTAR
 4. Afegeix el contenidor al area de magatzem
 */
 
-/** @brief Elimina un contenidor al terminal
-      \pre <em>Contenidor valid</em>
+/** @brief Elimina un contenidor del terminal
+      \pre <em>Cert</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */
 void retira_contenidor(string m); // ADMENT COM A COMANDA r
@@ -102,73 +106,62 @@ void retira_contenidor(string m); // ADMENT COM A COMANDA r
 // Entrada/Sortida
 
 /** @brief Imprimeix la ubicacio del contenidor amb matricula m, si no existeix imprimira (-1,-1,-1), si esta al area 
-           d'espera s'imprimira (-1,0,0) altrament imprimira la seva ubicacio en el terminal principal
+           d'espera s'imprimira (-1,0,0) altrament imprimira la seva ubicacio en el area magatzem
       \pre <em>Cert</em>
       \post S'ha escrit la ubicacio
 */
-void donde(string m); 
+void print_ubi(string m); 
 
 /** @brief Imprimeix la longitud l d'un contenidor amb matricula m
       \pre <em>Cert/em>
-      \post S'ha escrit la longitud o un error en cas de que no existeix contenidor amb matricula m a cap terminal
+      \post S'ha escrit la longitud o un error en cas de que no existeixi un contenidor amb matricula m 
 */
-void longitud (string m);
+void print_longitud (string m);
 
 /** @brief Imprimeix el nombre de hileres
-      \pre <em>Terminal creada</em>
+      \pre <em>Cert</em>
       \post S'ha escrit el nombre d'hileres
 */
-void num_hileras();
+void print_num_hileras();
 
 /** @brief Imprimeix el nombre de places
-      \pre <em>Terminal creada</em>
+      \pre <em>Cert</em>
       \post S'ha escrit el nombre de places en una hilera
 */
-void num_plazas(int n);
+void print_num_plazas();
 
 /** @brief Imprimeix el nombre de pisos
-      \pre <em>Terminal no creada</em>
+      \pre <em>Cert</em>
       \post S'ha escrit el nombre pisos en la plaça d'una hilera
 */
-void num_pisos(int n, int m);
+void print_num_pisos(int n, int m);
 
-/** @brief Imprimeix la llista de contenidors en l'area d'espera en ordre de sortida dels contenidors de forma m(l)
-      \pre <em>Cert</em>
-      \post S'ha escrit els contenidors a l'area d'espera
-*/
-void area_espera();
-
-/** @brief Imprimeix la llista dels contenidors en ordre alfabetic ascendent de forma m(<i,j,k>,l)
-      \pre <em>Terminal creada</em>
-      \post S'ha escrit els contenidors a l'area principal 
-*/
-void contenedores();
 
 /** @brief Imprimeix la matricula del contenidor que ocupa la posicio (i,j,k) si es buida, no s'imprimeix res, 
  *          si no es valida s'imprimeix error
       \pre <em>Cert</em>
       \post Retorna la posicio
 */
-void contenedor_ocupa(Ubicacion u);
+void print_contenedor_ocupa(int i,int j,int k);
 
 /** @brief Imprimeix l'area principal utilitzant la lletra inicial de m de forma bidimensional per fileres en ordre ascendent indicant pis i plaça
-      \pre <em>Terminal creada</em>
+      \pre <em>Cert</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
 */
-void area_almacenaje(); // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
+void print_area_almacenaje(); // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
 
 /** @brief Imprimeix una llista dels espais segons tamany de menor a major, si el tamany es igual, segons hilera i si es igual segons la plaça
-      \pre <em>Terminal creada</em>
+      \pre <em>Cert</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
 */
-void huecos();
+void print_huecos();
 
 private:
 
-Cjt_contenidors contenidors;
+Cjt_Contenidors contenidors;
 int n,m,h;
 vector <Hilera> v;
-A_espera a_espera;
+Area_Espera a_espera;
 
 };
 #endif
