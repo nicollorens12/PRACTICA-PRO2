@@ -5,7 +5,10 @@
 #ifndef _CONTENEDOR
 #define _CONTENEDOR
 
+#ifndef NO_DIAGRAM
 #include <string>
+#endif
+
 
 using namespace std;
 
