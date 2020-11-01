@@ -1,5 +1,5 @@
-/** @file Area_Magatzem.hh
-    @brief Especificació de la classe Area_Magatzem 
+/** @file Cjt_Contenidors.hh
+    @brief Especificació de la classe Cjt_Contenidors
 */
 
 #ifndef _
@@ -15,7 +15,10 @@
 
 using namespace std;
 
-class Cjt_contenidors {
+/** @class Cjt_Contenidors
+    @brief Representa el conjunt de tots el contenidors al terminal
+*/
+class Cjt_Contenidors {
 
 public:
 //Constructores;
@@ -24,14 +27,14 @@ public:
       \pre <em>Cert</em>
       \post El resultat és mapa de contenidors buit;
 */ 
-Cjt_contenidors();
+Cjt_Contenidors();
 
 //Destructora
 /** @brief Destructora
       \pre <em>Cert</em>
       \post Destrueix un objecte Cjt_contenidors
 */  
-~Cjt_contenidors();
+~Cjt_Contenidors();
 
 //Consultora
 /** @brief Consultora de la ubicacio del contenidor amb matricula m, si es buit retorna (-1,-1,-1) y 
@@ -55,6 +58,12 @@ void inserta_contenedor_cjt(string m, Segmento s);
 */
 void retira_contenidor_cjt(string m); 
 
+//Entrada/Sortida
+/** @brief Imprimeix la llista dels contenidors del terminal en ordre de matricula amb la seva posicio i longitud
+      \pre <em>Cert</em>
+      \post S'ha escrit els contenidors del terminal
+*/
+void contenedores();
 
 private:
 
