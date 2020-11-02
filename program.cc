@@ -2,7 +2,9 @@
     @brief Programa principal
 */
 #include "Area_Magatzem.hh"
+#ifndef NO_DIAGRAM
 #include <iostream>
+#endif
 
 using namespace std;
 

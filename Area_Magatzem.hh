@@ -21,7 +21,7 @@ class Area_Magatzem {
 
 //Constructores
 
-/** @brief Creadora amb arguments
+/** @brief Creadora
       \pre <em>Cert</em>
       \post  El resultat és un area magatzem amb N,M,H > 0 i una area d'esepera
 */ 
@@ -32,7 +32,7 @@ Area_Magatzem(int n, int m, int h);
 
 /** @brief Destructora
       \pre <em>Cert</em>
-      \post Destrueix un objecte Magatzem
+      \post Destrueix un objecte Area_Magatzem
 */  
 ~Area_Magatzem();
 
@@ -65,7 +65,7 @@ int altura() const;
 
 /** @brief Consultora de si una ubicacio te tamany l lliure
       \pre <em>Ubicacion certa</em>
-      \post retorna si hi cap un contenidor de tamany l a la posicio indicada
+      \post Retorna si hi cap un contenidor de tamany l a la posicio indicada
 */
 bool es_valid(Ubicacion pos,int l);
 
@@ -87,13 +87,6 @@ Segmento best_fit(vector<Hilera> v);
 void inserta_contenedor(string m, int l); // ADMENT COM A COMANDA i
 
 /* 
-PASOS INSERTAR
-
-1. Mira si la matricula es valida
-2. Busca on posar el contenedor (terna i j k)
-3. Afegeix el contenidor al mapa Cjt_estudiants
-4. Afegeix el contenidor al area de magatzem
-*/
 
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>

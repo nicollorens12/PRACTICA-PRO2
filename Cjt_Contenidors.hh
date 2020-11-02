@@ -2,8 +2,8 @@
     @brief Especificació de la classe Cjt_Contenidors
 */
 
-#ifndef _
-#define _
+#ifndef _CJT_CONTENIDORS
+#define _CJT_CONTENIDORS
 
 #include "Segmento.hh"
 #include "Contenedor.hh"
