@@ -18,7 +18,6 @@ using namespace std;
 typedef vector<string> Row; 
 typedef vector<Row> Matrix;
 
-
 /** @class Hilera
     @brief Representa una hilera de longitud M i altura H
 */
@@ -55,13 +54,13 @@ Segmento best_fit_aux(Hilera mat);
       \pre <em>Cert</em>
       \post S'ha impres la filera
 */
-void print_hilera(Hilera mat); 
+static void print_hilera(Hilera mat); 
 
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void print_huecos_hilera(Hilera mat);
+static void print_huecos_hilera(Hilera mat);
 
 private:
     Matrix mat;
