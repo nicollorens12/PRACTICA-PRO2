@@ -63,7 +63,7 @@ void retira_contenidor_cjt(string m);
       \pre <em>Cert</em>
       \post S'ha escrit els contenidors del terminal
 */
-void print_contenedores();
+static void print_contenedores();
 
 private:
 

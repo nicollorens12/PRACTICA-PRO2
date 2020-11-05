@@ -103,31 +103,31 @@ void retira_contenidor(string m); // ADMENT COM A COMANDA r
       \pre <em>Cert</em>
       \post S'ha escrit la ubicacio
 */
-void print_ubi(string m); 
+static void print_ubi(string m); 
 
 /** @brief Imprimeix la longitud l d'un contenidor amb matricula m
       \pre <em>Cert/em>
       \post S'ha escrit la longitud o un error en cas de que no existeixi un contenidor amb matricula m 
 */
-void print_longitud (string m);
+static void print_longitud (string m);
 
 /** @brief Imprimeix el nombre de hileres
       \pre <em>Cert</em>
       \post S'ha escrit el nombre d'hileres
 */
-void print_num_hileras();
+static void print_num_hileras();
 
 /** @brief Imprimeix el nombre de places
       \pre <em>Cert</em>
       \post S'ha escrit el nombre de places en una hilera
 */
-void print_num_plazas();
+static void print_num_plazas();
 
 /** @brief Imprimeix el nombre de pisos
       \pre <em>Cert</em>
       \post S'ha escrit el nombre pisos en la plaça d'una hilera
 */
-void print_num_pisos(int n, int m);
+static void print_num_pisos(int n, int m);
 
 
 /** @brief Imprimeix la matricula del contenidor que ocupa la posicio (i,j,k) si es buida, no s'imprimeix res, 
@@ -135,19 +135,19 @@ void print_num_pisos(int n, int m);
       \pre <em>Cert</em>
       \post Retorna la posicio
 */
-void print_contenedor_ocupa(int i,int j,int k);
+static void print_contenedor_ocupa(int i,int j,int k);
 
 /** @brief Imprimeix l'area principal utilitzant la lletra inicial de m de forma bidimensional per fileres en ordre ascendent indicant pis i plaça
       \pre <em>Cert</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
 */
-void print_area_almacenaje(); // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
+static void print_area_almacenaje(); // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
 
 /** @brief Imprimeix una llista dels espais segons tamany de menor a major, si el tamany es igual, segons hilera i si es igual segons la plaça
       \pre <em>Cert</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
 */
-void print_huecos();
+static void print_huecos();
 
 private:
 

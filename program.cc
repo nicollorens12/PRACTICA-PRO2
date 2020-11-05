@@ -34,33 +34,33 @@ int main(){
         else if (comando == "donde"){
             string matricula;
             cin >> matricula;
-            print_ubi(matricula);
+            Area_Magatzem::print_ubi(matricula);
         }
 
         else if (comando == "longitud"){
             string matricula; 
             cin >> matricula;
-            print_longitud(matricula);
+            Area_Magatzem::print_longitud(matricula);
         }
 
         else if (comando == "contenedor_ocupa"){
             int i,j,k;
             cin >> i >> j >> k;
-            print_contenedor_ocupa(i,j,k);
+            Area_Magatzem::print_contenedor_ocupa(i,j,k);
         }
 
         else if (comando == "num_pisos"){
             int i,j;
             cin >> i >> j;
-            print_num_pisos(i,j);
+            Area_Magatzem::print_num_pisos(i,j);
         }
 
-        else if (comando == "num_hileras") print_num_hileras();
-        else if (comando == "num_plazas") print_num_plazas();
-        else if (comando == "area_espera")print_a_espera();
-        else if (comando == "contenedores") print_contenedores();
-        else if (comando == "area_almacenaje") print_area_almacenaje();
-        else if (comando == "huecos") print_huecos();
+        else if (comando == "num_hileras") Area_Magatzem::print_num_hileras();
+        else if (comando == "num_plazas") Area_Magatzem::print_num_plazas();
+        else if (comando == "area_espera") Area_Espera::print_a_espera();
+        else if (comando == "contenedores") Cjt_Contenidors::print_contenedores();
+        else if (comando == "area_almacenaje") Area_Magatzem::print_area_almacenaje();
+        else if (comando == "huecos") Area_Magatzem::print_huecos();
 
         cin >> comando;
         }

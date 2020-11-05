@@ -40,7 +40,7 @@ Area_Espera();
       \pre <em>Cert</em>
       \post S'ha impres l'area d'espera
 */  
-void print_a_espera();
+static void print_a_espera();
 
 private:
 
