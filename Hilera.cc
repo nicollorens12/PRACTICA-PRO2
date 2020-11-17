@@ -11,7 +11,8 @@ using namespace std;
       \post S'ha creat una filera m x h
 */
 Hilera::Hilera(int m,int h){
-    Matrix mat(m,Row(h,""));
+    Matrix m(m,Row(h,""));
+    mat = m;
 }
 
 //Destructora?

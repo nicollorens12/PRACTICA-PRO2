@@ -17,7 +17,14 @@ using namespace std;
     @brief Representa el area de magatzem del terminal
 */
 class Area_Magatzem {
-    public:
+
+private:
+
+int n,m,h;
+vector <Hilera> v;
+// Area_Espera a_espera;
+
+public:
 
 //Constructores
 
@@ -82,8 +89,6 @@ Ubicacion best_fit(Contenedor c);
 */
 void inserta_contenedor(string m, int l,Ubicacion& u); // ADMENT COM A COMANDA i
 
-/* 
-
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
@@ -129,12 +134,6 @@ void print_area_almacenaje(); // Si el numero de hileras es superior a nueve se 
 */
 void print_huecos();
 
-private:
-
-Cjt_Contenidors contenidors;
-int n,m,h;
-vector <Hilera> v;
-// Area_Espera a_espera;
 
 };
 #endif

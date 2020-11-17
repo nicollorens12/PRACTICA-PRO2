@@ -56,12 +56,14 @@ int Area_Magatzem::altura() const{
 // ENTREGA INTERMEDIA SIEMPRE HABRA UN SITIO DONDE PONER EL CONTENEDOR
 Ubicacion Area_Magatzem::best_fit(Contenedor c){
       int i = 0; // punter a les hileres m
+      Ubicacion u;
       bool found = false;
       while (i < m and not found){
-            Ubicacion s = v[i].best_fit_aux(c,i);
-            if(s.hilera() == -1)   ++i;
-            else return s;
+            u = v[i].best_fit_aux(c,i);
+            if(u.hilera() != -1) found = true;
+            else ++i;
       }
+      return u;
 }
 
 
@@ -81,7 +83,6 @@ void Area_Magatzem::inserta_contenedor(string m, int l,Ubicacion& u){
 
 } // ADMENT COM A COMANDA i
 
-/* 
 
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
