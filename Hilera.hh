@@ -7,6 +7,7 @@
 
 #include "Ubicacion.hh"
 #include "Segmento.hh"
+#include "Contenedor.hh"
 
 #ifndef NO_DIAGRAM
 #include <vector>
@@ -46,7 +47,9 @@ Hilera(int m,int h);
       \pre <em>Cert</em>
       \post S'ha retornat la posicio i la longitud del lloc que s'ha trobat, si no s'ha trobat cap retorna un segment amb l = 0
 */
-Segmento best_fit_aux(Hilera mat);
+Ubicacion best_fit_aux(Contenedor c,int hilera);
+
+
 
 //Entrada/Salida
 
@@ -54,16 +57,20 @@ Segmento best_fit_aux(Hilera mat);
       \pre <em>Cert</em>
       \post S'ha impres la filera
 */
-static void print_hilera(Hilera mat); 
+void print_hilera() const; 
 
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-static void print_huecos_hilera(Hilera mat);
+void print_huecos_hilera(int i,vector<Segmento> v);
+
+//Operadors 
+Row operator[](int i) const;
 
 private:
     Matrix mat;
+    
 };
 
 #endif

@@ -44,13 +44,26 @@ Cjt_Contenidors();
 */
 Ubicacion ubi(string m);
 
+/** @brief Consultora de la longitud del contenidor amb matricula m
+      \pre <em>Cert</em>
+      \post Retorna la longitud del contenidor
+*/
+int longitud(string m);
+
+/** @brief Consultora el segmento que ocupa un contenedor m
+      \pre <em>Cert</em>
+      \post Retorna el segment del contenidor si no existeix retorna Segment buit
+*/
+Segmento consulta_contenidor(string m);
+
+
 //Operadors
 
 /** @brief Inserta un contenidor en el terminal
       \pre <em>Cert</em>
       \post El contenidor s'ha afegit al Cjt i si ja hi existia el Cjt no s'ha modificat
 */
-void inserta_contenedor_cjt(string m, Segmento s);
+void inserta_contenedor(string m, Segmento s);
 
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
@@ -63,7 +76,9 @@ void retira_contenidor_cjt(string m);
       \pre <em>Cert</em>
       \post S'ha escrit els contenidors del terminal
 */
-static void print_contenedores();
+void print_contenedores() const; 
+
+
 
 private:
 

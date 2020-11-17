@@ -15,7 +15,8 @@ int main(){
     // comando == "crea_terminal N M H"
         int n,m,h;
         cin >> n >> m >> h;
-        Area_Magatzem(n,m,h);
+        Area_Magatzem area(n,m,h); //t
+        Cjt_Contenidors contenidor; //conj
         cin >> comando;
         while (comando != "fin" and comando != "crea_terminal") {
 
@@ -23,44 +24,50 @@ int main(){
             string matricula;
             int l;
             cin >> matricula >> l;
-
+            Ubicacion u;
+            area.inserta_contenedor(matricula,l,u);
+            Segmento s(u,l);
+            contenidor.inserta_contenedor(matricula,s);
         }
 
         else if(comando == "retira_contenedor" or comando == "r"){
             string matricula;
             cin >> matricula;
+            Segmento s = contenidor.consulta_contenidor(matricula);
+            contenidor.retira_contenidor_cjt(matricula);
+            area.retira_contenidor(s);
         }
 
         else if (comando == "donde"){
             string matricula;
             cin >> matricula;
-            Area_Magatzem::print_ubi(matricula);
+            contenidor.ubi(matricula);
         }
 
         else if (comando == "longitud"){
             string matricula; 
             cin >> matricula;
-            Area_Magatzem::print_longitud(matricula);
+            contenidor.longitud(matricula);
         }
 
         else if (comando == "contenedor_ocupa"){
             int i,j,k;
             cin >> i >> j >> k;
-            Area_Magatzem::print_contenedor_ocupa(i,j,k);
+            area.print_contenedor_ocupa(i,j,k);
         }
 
         else if (comando == "num_pisos"){
             int i,j;
             cin >> i >> j;
-            Area_Magatzem::print_num_pisos(i,j);
+            area.print_num_pisos();
         }
 
-        else if (comando == "num_hileras") Area_Magatzem::print_num_hileras();
-        else if (comando == "num_plazas") Area_Magatzem::print_num_plazas();
-        else if (comando == "area_espera") Area_Espera::print_a_espera();
-        else if (comando == "contenedores") Cjt_Contenidors::print_contenedores();
-        else if (comando == "area_almacenaje") Area_Magatzem::print_area_almacenaje();
-        else if (comando == "huecos") Area_Magatzem::print_huecos();
+        else if (comando == "num_hileras") area.print_num_hileras();
+        else if (comando == "num_plazas") area.print_num_plazas();
+        // else if (comando == "area_espera") Area_Espera::print_a_espera();
+        else if (comando == "contenedores") contenidor.print_contenedores();
+        else if (comando == "area_almacenaje") area.print_area_almacenaje();
+        else if (comando == "huecos") area.print_huecos();
 
         cin >> comando;
         }
