@@ -22,6 +22,7 @@ private:
 
 int n,m,h;
 vector <Hilera> v;
+static bool space_sort(Segmento a, Segmento b);
 // Area_Espera a_espera;
 
 public:

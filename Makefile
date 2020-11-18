@@ -1,10 +1,8 @@
 OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11
 
 program.exe: program.o Area_Magatzem.o Cjt_Contenidors.o Hilera.o Segmento.o Contenedor.o Ubicacion.o
-	g++ -o program.exe Area_Magatzem.exe Cjt_Contenidors.exe Hilera.exe Segmento.exe Contenedor.exe Ubicacion.exe
-
-program.o: program.cc  Area_Magatzem.hh Cjt_Contenidors.hh Hilera.hh Segmento.hh Contenedor.hh Ubicacion.hh
-	g++ -c program.cc $(OPCIONS)
+	g++ -o program.exe program.o Area_Magatzem.o Cjt_Contenidors.o Hilera.o Segmento.o Contenedor.o Ubicacion.o
+	rm *.o
 
 Area_Magatzem.o: Area_Magatzem.cc Area_Magatzem.hh
 	g++ -c Area_Magatzem.cc $(OPCIONS)
@@ -23,6 +21,10 @@ Contenedor.o: Contenedor.cc Contenedor.hh
 
 Ubicacion.o: Ubicacion.cc Ubicacion.hh
 	g++ -c Ubicacion.cc $(OPCIONS)
+
+program.o: program.cc
+	g++ -c program.cc $(OPCIONS)
+
 
 clean:
 	rm *.o

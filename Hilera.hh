@@ -63,7 +63,7 @@ void print_hilera() const;
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void print_huecos_hilera(int i,vector<Segmento> v);
+void print_huecos_hilera(int i,vector<Segmento>& v);
 
 //Operadors 
 Row operator[](int i) const;

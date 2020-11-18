@@ -1,5 +1,6 @@
 #include "Area_Magatzem.hh"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -58,7 +59,7 @@ Ubicacion Area_Magatzem::best_fit(Contenedor c){
       int i = 0; // punter a les hileres m
       Ubicacion u;
       bool found = false;
-      while (i < m and not found){
+      while (i < n and not found){
             u = v[i].best_fit_aux(c,i);
             if(u.hilera() != -1) found = true;
             else ++i;
@@ -154,6 +155,15 @@ void Area_Magatzem::print_area_almacenaje(){
       }
 } // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
 
+bool Area_Magatzem::space_sort(Segmento a, Segmento b){
+      if (a.longitud() == b.longitud()){
+            if(a.ubic().hilera() == b.ubic().hilera() and a.ubic().plaza() == b.ubic().plaza()) return a.ubic().piso() < b.ubic().piso();
+            else if (a.ubic().hilera() == b.ubic().hilera()) return a.ubic().plaza() < b.ubic().plaza();
+            else return a.ubic().hilera() < b.ubic().hilera();
+      }
+      return a.longitud() < b.longitud();
+}
+
 /** @brief Imprimeix una llista dels espais segons tamany de menor a major, si el tamany es igual, segons hilera i si es igual segons la plaça
       \pre <em>Cert</em>
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
@@ -161,7 +171,13 @@ void Area_Magatzem::print_area_almacenaje(){
 void Area_Magatzem::print_huecos(){
       vector<Segmento> v_huecos;
       for(int i = 0; i < n; ++i){
-            v[i].print_huecos_hilera(i,v_huecos);
+           v[i].print_huecos_hilera(i,v_huecos);
       }
-      // v_huecos.sort(v.begin(),v.end(),)
+      sort(v_huecos.begin(),v_huecos.end(),space_sort);
+
+      int v_size = v_huecos.size();
+
+      for(int j = 0; j < v_size; ++j){
+            v_huecos[j].print();
+      }
 }

@@ -26,35 +26,34 @@ Hilera::~Hilera(){}
 //Segmento con longitud 0 = no se puede colocar el contenedor en esta hilera
 
 Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
-      int n = mat.size();
+      int h = mat.size();
       int m = mat[0].size();
+
       Ubicacion u; 
       bool found = false;
-      int i,j;
-      i = 0;
 
-      while(i < n and not found){
+      int i = 0;
+      
+      while(i < h and not found){
             int j = 0;
             while(j < m and not found){
-                  if (mat[i][j].empty()){
+                  bool stop = false;
+                  int hueco_size = 0;
+                  int l = c.longitud();
+                  while (j < m and mat[i][j].empty() and not stop) {
 
-                        int hueco_size = 1;
-                        int l = c.longitud();
-                        while (not found and j < n ){
-                        j++;
-                        if (mat[i][j].empty()){
-                              if (i == 0) ++hueco_size;
-                              else if (not mat[i-1][j].empty()) ++hueco_size;
-                        }
-                        else if (not mat[i][j].empty()) found = false;
-                        if(hueco_size == l){
+                        if (i == 0) ++hueco_size;
+                        else if(not mat[i-1][j].empty())++hueco_size;
+                        else stop = true;
+                        
+                        if(hueco_size == l and not stop){
                               found = true;
-                              Ubicacion aux(i,hilera,j); // coordenada i se 
+                              stop = true;
+                              Ubicacion aux(hilera,j,i); // coordenada i se 
                               u = aux;
                         }
-                        ++j;
-                        }
-
+                        else if (not stop) ++j;
+                        
                   }
                   ++j;
             }
@@ -101,10 +100,9 @@ void Hilera::print_hilera() const {
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void Hilera::print_huecos_hilera(int n,vector<Segmento> v){
+void Hilera::print_huecos_hilera(int n,vector<Segmento>& v){
       int m = mat.size();
       int h = mat[0].size();
-      vector<Segmento> v;
       Ubicacion u;
       for(int i = 0; i < h; ++i){
             for (int j = 0; j < m; ++j){
