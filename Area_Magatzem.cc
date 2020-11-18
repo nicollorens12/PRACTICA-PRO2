@@ -7,7 +7,7 @@ Area_Magatzem::Area_Magatzem(int n_i, int m_i, int h_i){
       n = n_i;
       m = m_i;
       h = h_i;
-      v = vector<Hilera> (n_i); // m h?
+      v = vector<Hilera> (n_i, Hilera(m_i,h_i)); // m h?
 }
 
 

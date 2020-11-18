@@ -10,8 +10,8 @@ using namespace std;
       \pre <em>Cert</em>
       \post S'ha creat una filera m x h
 */
-Hilera::Hilera(int m,int h){
-    Matrix m(m,Row(h,""));
+Hilera::Hilera(int m_i,int h_i){
+    Matrix m(m_i,Row(h_i,""));
     mat = m;
 }
 
