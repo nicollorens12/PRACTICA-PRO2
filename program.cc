@@ -24,10 +24,16 @@ int main(){
             string matricula;
             int l;
             cin >> matricula >> l;
-            Ubicacion u;
-            area.inserta_contenedor(matricula,l,u);
-            Segmento s(u,l);
-            contenidor.inserta_contenedor(matricula,s);
+
+            if(not contenidor.exists(matricula)){
+                Ubicacion u;
+                area.inserta_contenedor(matricula,l,u);
+                Segmento s(u,l);
+                contenidor.inserta_contenedor(matricula,s);
+            }
+
+            else cout << "error: el contenedor ya existe" << endl;
+            
         }
 
         else if(comando == "retira_contenedor" or comando == "r"){

@@ -49,7 +49,8 @@ Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
                         if(hueco_size == l and not stop){
                               found = true;
                               stop = true;
-                              Ubicacion aux(hilera,j,i); // coordenada i se 
+                              cout << j << endl;
+                              Ubicacion aux(hilera,((j-l) + 1),i);
                               u = aux;
                         }
                         else if (not stop) ++j;
@@ -62,6 +63,15 @@ Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
       return u;
 }
 
+void Hilera::modifica_hilera(int m, int h,Contenedor c){
+      int l = c.longitud();
+      string matricula = c.matricula();
+      for (int i = m; i < m+l; ++i){
+            
+            mat[i][h] = matricula;
+      }
+}
+
 //Entrada/Salida
 
 /** @brief Imprimeix la posicio i la matricula dels contenidors de la filera. Auxiliar de la funcio print_area_almacenaje()
@@ -70,32 +80,40 @@ Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
 */
 void Hilera::print_hilera() const {
       
-      int h = mat[0].size() - 1;
-      
-      while (h >= 0){
-            cout << h << " ";
-            int n = mat.size() - 1;
-            while (n >= 0){
-                  if (mat[h][n].empty()) cout << " ";
-                  else cout << mat[h][n];
+     for(int i = mat[0].size() - 1; i >= 0; --i){
+           cout << i << " ";
+            for (int j = 0; j < mat.size(); ++j){
+                  if (mat[j][i] != "") cout << mat[j][i] << " ";
+                  else cout << "e" << " ";
             }
-
+            cout << endl;
       }
+      
       cout << "  ";
       int aux_counter = 0;
       int n = mat.size();
-      for (int i = 0; i < n; ++i){
-            if (i < 10){
-                  cout << aux_counter;
+      for (int k = 0; k < n; ++k){
+            if (k < 10){
+                  cout << aux_counter << " ";
                   ++aux_counter;
             }
             else{
                   aux_counter = 0;
-                  cout << aux_counter;
+                  cout << aux_counter << " ";
             }
       }
 }
 
+
+void Hilera::print_aux() const{
+      for(int i = mat[0].size() - 1; i >= 0; --i){
+            for (int j = 0; j < mat.size(); ++j){
+                  if (mat[j][i] != "") cout << mat[j][i] << " ";
+                  else cout << "e" << " ";
+            }
+            cout << endl;
+      }
+}
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera

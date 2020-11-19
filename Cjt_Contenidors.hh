@@ -56,6 +56,12 @@ int longitud(string m);
 */
 Segmento consulta_contenidor(string m);
 
+/** @brief Consulta si existeix un objecte amb key = m al mapa
+      \pre <em>Cert</em>
+      \post Retorna cert si existeix, fals altrament
+*/
+bool exists(string m);
+
 
 //Operadors
 

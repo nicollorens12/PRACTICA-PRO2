@@ -24,6 +24,12 @@ Segmento Cjt_Contenidors::consulta_contenidor(string m){
     return it->second;
 }
 
+bool Cjt_Contenidors::exists(string m){
+    map<string,Segmento>::const_iterator it = cjt.find(m);
+    if(it == cjt.end()) return false;
+    return true;
+}
+
 void Cjt_Contenidors::inserta_contenedor(string m, Segmento s){
 
     pair<string,Segmento> p;

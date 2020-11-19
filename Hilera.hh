@@ -49,6 +49,14 @@ Hilera(int m,int h);
 */
 Ubicacion best_fit_aux(Contenedor c,int hilera);
 
+// Modificadores
+
+/** @brief Inserta el contenidor c en una ubicacio m,h determinada 
+      \pre <em>Cert</em>
+      \post La hilera ara te la matricula escrita en les posicions m,h fins m+l,h
+*/
+void modifica_hilera(int m, int h,Contenedor c);
+
 
 
 //Entrada/Salida
@@ -58,6 +66,8 @@ Ubicacion best_fit_aux(Contenedor c,int hilera);
       \post S'ha impres la filera
 */
 void print_hilera() const; 
+
+void print_aux() const;
 
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>

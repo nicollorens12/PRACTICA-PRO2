@@ -77,12 +77,12 @@ Ubicacion Area_Magatzem::best_fit(Contenedor c){
 void Area_Magatzem::inserta_contenedor(string m, int l,Ubicacion& u){
       Contenedor c(m,l);
       u = best_fit(c);
-      
-      for(int i = 0; i < l; ++i){
-            v[u.hilera()][u.piso()][u.plaza() + i] = m;
-      }
+      u.print();
+      cout << endl;
 
-} // ADMENT COM A COMANDA i
+      v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),c);
+      
+}
 
 
 /** @brief Elimina un contenidor del terminal
