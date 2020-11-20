@@ -26,36 +26,37 @@ Hilera::~Hilera(){}
 //Segmento con longitud 0 = no se puede colocar el contenedor en esta hilera
 
 Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
-      int h = mat.size();
-      int m = mat[0].size();
+      int m = mat.size();
+      int h = mat[0].size();
 
       Ubicacion u; 
       bool found = false;
 
       int i = 0;
-      
+      int l = c.longitud();
+
       while(i < h and not found){
             int j = 0;
             while(j < m and not found){
                   bool stop = false;
                   int hueco_size = 0;
-                  int l = c.longitud();
-                  while (j < m and mat[i][j].empty() and not stop) {
+                  
+                  while (j < m and mat[j][i].empty() and not stop) {
 
                         if (i == 0) ++hueco_size;
-                        else if(not mat[i-1][j].empty())++hueco_size;
+                        else if(not mat[j][i-1].empty())++hueco_size;
                         else stop = true;
                         
                         if(hueco_size == l and not stop){
                               found = true;
                               stop = true;
-                              cout << j << endl;
                               Ubicacion aux(hilera,((j-l) + 1),i);
                               u = aux;
                         }
                         else if (not stop) ++j;
                         
                   }
+                  
                   ++j;
             }
           ++i;
@@ -63,13 +64,13 @@ Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
       return u;
 }
 
-void Hilera::modifica_hilera(int m, int h,Contenedor c){
-      int l = c.longitud();
-      string matricula = c.matricula();
+void Hilera::modifica_hilera(int m, int h,string matricula, int l){
+     
       for (int i = m; i < m+l; ++i){
             
             mat[i][h] = matricula;
       }
+
 }
 
 //Entrada/Salida
@@ -79,11 +80,11 @@ void Hilera::modifica_hilera(int m, int h,Contenedor c){
       \post S'ha impres la filera
 */
 void Hilera::print_hilera() const {
-      
-     for(int i = mat[0].size() - 1; i >= 0; --i){
-           cout << i << " ";
+    
+      for(int i = mat[0].size() - 1; i >= 0; --i){
+      cout << i << " ";
             for (int j = 0; j < mat.size(); ++j){
-                  if (mat[j][i] != "") cout << mat[j][i] << " ";
+                  if (not mat[j][i].empty()) cout << mat[j][i] << " ";
                   else cout << "e" << " ";
             }
             cout << endl;
@@ -93,14 +94,9 @@ void Hilera::print_hilera() const {
       int aux_counter = 0;
       int n = mat.size();
       for (int k = 0; k < n; ++k){
-            if (k < 10){
-                  cout << aux_counter << " ";
-                  ++aux_counter;
-            }
-            else{
-                  aux_counter = 0;
-                  cout << aux_counter << " ";
-            }
+            if (k%10 == 0) aux_counter = 0;
+            cout << aux_counter << " ";
+            aux_counter++;
       }
 }
 

@@ -80,7 +80,7 @@ void Area_Magatzem::inserta_contenedor(string m, int l,Ubicacion& u){
       u.print();
       cout << endl;
 
-      v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),c);
+      v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),m,l);
       
 }
 
@@ -90,13 +90,8 @@ void Area_Magatzem::inserta_contenedor(string m, int l,Ubicacion& u){
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */
 void Area_Magatzem::retira_contenidor(Segmento s){
-      int n = s.ubic().hilera();
-      int m = s.ubic().plaza();
-      int h = s.ubic().piso();
-      int l = s.longitud();
-      for (int i = m; i < m+l; ++i){
-            v[n][i][h] = "";
-      }
+     
+      v[s.ubic().hilera()].modifica_hilera(s.ubic().plaza(),s.ubic().piso(),"",s.longitud());
 } // ADMENT COM A COMANDA r
 
 
@@ -135,7 +130,7 @@ void Area_Magatzem::print_num_pisos(){
       \post Retorna la posicio
 */
 void Area_Magatzem::print_contenedor_ocupa(int i,int j,int k){
-      if( (i > n or j > m or k > h) or (i < 0 or j < 0 or k < 0)){
+      if( (i >= n or j >= m or k >= h) or (i < 0 or j < 0 or k < 0)){
             cout << "ERROR: la ubicacio <" << i << "," << j << "," << k << "> esta fora dels limits del area de magatzem" << endl;
       }
       else if (v[i][j][k].empty()) cout << endl;

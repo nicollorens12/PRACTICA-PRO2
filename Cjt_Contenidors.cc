@@ -10,12 +10,18 @@ Cjt_Contenidors::~Cjt_Contenidors(){}
 Ubicacion Cjt_Contenidors::ubi(string m){
     map<string,Segmento>::const_iterator it;
     it = cjt.find(m);
+    
+    if (it == cjt.end()){
+        Ubicacion u;
+        return u;
+    } 
     return it->second.ubic();
 }
 
 int Cjt_Contenidors::longitud(string m){
     map<string,Segmento>::const_iterator it;
     it = cjt.find(m);
+    if (it == cjt.end()) return -1;
     return it->second.longitud();
 }
 

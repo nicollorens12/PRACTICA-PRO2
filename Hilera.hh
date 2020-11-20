@@ -55,7 +55,7 @@ Ubicacion best_fit_aux(Contenedor c,int hilera);
       \pre <em>Cert</em>
       \post La hilera ara te la matricula escrita en les posicions m,h fins m+l,h
 */
-void modifica_hilera(int m, int h,Contenedor c);
+void modifica_hilera(int m, int h, string matricula, int l);
 
 
 

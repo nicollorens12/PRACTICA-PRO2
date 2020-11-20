@@ -32,7 +32,7 @@ int main(){
                 contenidor.inserta_contenedor(matricula,s);
             }
 
-            else cout << "error: el contenedor ya existe" << endl;
+            else cout << "Error: el contenedor ya existe" << endl;
             
         }
 
@@ -47,13 +47,15 @@ int main(){
         else if (comando == "donde"){
             string matricula;
             cin >> matricula;
-            contenidor.ubi(matricula);
+            contenidor.ubi(matricula).print();
+            cout << endl;
         }
 
         else if (comando == "longitud"){
             string matricula; 
             cin >> matricula;
-            contenidor.longitud(matricula);
+            if(contenidor.longitud(matricula) != -1) cout << contenidor.longitud(matricula) << endl;
+            else cout << "Error: el contenedor no existe" << endl;
         }
 
         else if (comando == "contenedor_ocupa"){
