@@ -67,13 +67,13 @@ void modifica_hilera(int m, int h, string matricula, int l);
 */
 void print_hilera() const; 
 
-void print_aux() const;
-
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void print_huecos_hilera(int i,vector<Segmento>& v);
+void huecos_hilera(int i,vector<Segmento>& v);
+
+void print_pos(int x, int y);
 
 //Operadors 
 Row operator[](int i) const;

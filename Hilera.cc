@@ -11,8 +11,7 @@ using namespace std;
       \post S'ha creat una filera m x h
 */
 Hilera::Hilera(int m_i,int h_i){
-    Matrix m(m_i,Row(h_i,""));
-    mat = m;
+    mat = Matrix (h_i,Row(m_i,""));
 }
 
 //Destructora?
@@ -26,8 +25,8 @@ Hilera::~Hilera(){}
 //Segmento con longitud 0 = no se puede colocar el contenedor en esta hilera
 
 Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
-      int m = mat.size();
-      int h = mat[0].size();
+      int m = mat[0].size();
+      int h = mat.size();
 
       Ubicacion u; 
       bool found = false;
@@ -41,10 +40,10 @@ Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
                   bool stop = false;
                   int hueco_size = 0;
                   
-                  while (j < m and mat[j][i].empty() and not stop) {
+                  while (j < m and mat[i][j].empty() and not stop) {
 
                         if (i == 0) ++hueco_size;
-                        else if(not mat[j][i-1].empty())++hueco_size;
+                        else if(not mat[i-1][j].empty())++hueco_size;
                         else stop = true;
                         
                         if(hueco_size == l and not stop){
@@ -68,7 +67,7 @@ void Hilera::modifica_hilera(int m, int h,string matricula, int l){
      
       for (int i = m; i < m+l; ++i){
             
-            mat[i][h] = matricula;
+            mat[h][i] = matricula;
       }
 
 }
@@ -80,61 +79,74 @@ void Hilera::modifica_hilera(int m, int h,string matricula, int l){
       \post S'ha impres la filera
 */
 void Hilera::print_hilera() const {
-    
-      for(int i = mat[0].size() - 1; i >= 0; --i){
+      for(int i = mat.size() - 1; i >= 0; --i){
       cout << i << " ";
-            for (int j = 0; j < mat.size(); ++j){
-                  if (not mat[j][i].empty()) cout << mat[j][i] << " ";
-                  else cout << "e" << " ";
+            for (int j = 0; j < mat[0].size(); ++j){
+                  if (not mat[i][j].empty()) cout << mat[i][j];
+                  else cout << " ";
             }
             cout << endl;
       }
       
       cout << "  ";
       int aux_counter = 0;
-      int n = mat.size();
-      for (int k = 0; k < n; ++k){
+      int m = mat[0].size();
+      for (int k = 0; k < m; ++k){
             if (k%10 == 0) aux_counter = 0;
-            cout << aux_counter << " ";
+            cout << aux_counter;
             aux_counter++;
       }
+      cout << endl;
 }
 
-
-void Hilera::print_aux() const{
-      for(int i = mat[0].size() - 1; i >= 0; --i){
-            for (int j = 0; j < mat.size(); ++j){
-                  if (mat[j][i] != "") cout << mat[j][i] << " ";
-                  else cout << "e" << " ";
-            }
-            cout << endl;
-      }
-}
 /** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void Hilera::print_huecos_hilera(int n,vector<Segmento>& v){
-      int m = mat.size();
-      int h = mat[0].size();
+void Hilera::huecos_hilera(int n,vector<Segmento>& v){
+      int m = mat[0].size();
+      int h = mat.size();
       Ubicacion u;
       for(int i = 0; i < h; ++i){
             for (int j = 0; j < m; ++j){
-                  if(mat[i][j].empty() and u.hilera() != -1){
-                        Ubicacion aux1(n,i,j);
-                        u = aux1;
+
+                  if(mat[i][j].empty() and u.hilera() == -1 and (i == 0 or not mat[i-1][j].empty()) ){
+                        u = Ubicacion(n,j,i);
                   }
-                  else if(not mat[i][j].empty() and u.hilera() != -1){ 
-                        Ubicacion aux2(n,i,j);
+                  
+                  else if(not mat[i][j].empty() and u.hilera() != -1){
+                        cout << mat[i][j] << endl;
+                        Ubicacion aux2(n,j,i);
                         int l = aux2.plaza() - u.plaza();
-                        Ubicacion aux3;
-                        u = aux3;
                         Segmento s(u,l);
                         v.push_back(s);
+                        u = Ubicacion();
+                        
+
+                  } 
+
+                  else if (u.hilera() != -1 and i != 0 and mat[i-1][j].empty() ){ 
+                        Ubicacion aux2(n,j,i);
+                        int l = aux2.plaza() - u.plaza();
+                        Segmento s(u,l);
+                        v.push_back(s);
+                        u = Ubicacion();
                   }
+                
+            }
+            if(mat[i][m-1].empty() and u.hilera() != -1){
+                  int l = m - u.plaza();
+                  Segmento s(u,l);
+                  v.push_back(s);
+                  u = Ubicacion();
+                  
             }
       }
 
+}
+
+void Hilera::print_pos(int x, int y){
+      cout << mat[x][y] << endl;
 }
 
 Row Hilera::operator[](int i) const {

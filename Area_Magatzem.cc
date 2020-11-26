@@ -79,8 +79,7 @@ void Area_Magatzem::inserta_contenedor(string m, int l,Ubicacion& u){
       u = best_fit(c);
       u.print();
       cout << endl;
-
-      v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),m,l);
+      if (u.hilera() != -1) v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),m,l);
       
 }
 
@@ -130,11 +129,11 @@ void Area_Magatzem::print_num_pisos(){
       \post Retorna la posicio
 */
 void Area_Magatzem::print_contenedor_ocupa(int i,int j,int k){
-      if( (i >= n or j >= m or k >= h) or (i < 0 or j < 0 or k < 0)){
-            cout << "ERROR: la ubicacio <" << i << "," << j << "," << k << "> esta fora dels limits del area de magatzem" << endl;
+      if( (i >= n or j >= h or k >= m) or (i < 0 or j < 0 or k < 0)){
+            cout << "error: ubicacion fuera de rango" << endl;
       }
       else if (v[i][j][k].empty()) cout << endl;
-      else cout << v[i][j][k] << endl;
+      else v[i].print_pos(j,k);
 }
 
 /** @brief Imprimeix l'area principal utilitzant la lletra inicial de m de forma bidimensional per fileres en ordre ascendent indicant pis i plaça
@@ -166,12 +165,12 @@ bool Area_Magatzem::space_sort(Segmento a, Segmento b){
 void Area_Magatzem::print_huecos(){
       vector<Segmento> v_huecos;
       for(int i = 0; i < n; ++i){
-           v[i].print_huecos_hilera(i,v_huecos);
+           v[i].huecos_hilera(i,v_huecos);
       }
       sort(v_huecos.begin(),v_huecos.end(),space_sort);
-
+      
       int v_size = v_huecos.size();
-
+      
       for(int j = 0; j < v_size; ++j){
             v_huecos[j].print();
       }

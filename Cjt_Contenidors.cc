@@ -27,6 +27,7 @@ int Cjt_Contenidors::longitud(string m){
 
 Segmento Cjt_Contenidors::consulta_contenidor(string m){
     map<string,Segmento>::const_iterator it = cjt.find(m);
+    if(it == cjt.end()) return Segmento();
     return it->second;
 }
 

@@ -2,7 +2,6 @@ OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare
 
 program.exe: program.o Area_Magatzem.o Cjt_Contenidors.o Hilera.o Segmento.o Contenedor.o Ubicacion.o
 	g++ -o program.exe program.o Area_Magatzem.o Cjt_Contenidors.o Hilera.o Segmento.o Contenedor.o Ubicacion.o
-	rm *.o
 
 Area_Magatzem.o: Area_Magatzem.cc Area_Magatzem.hh
 	g++ -c Area_Magatzem.cc $(OPCIONS)

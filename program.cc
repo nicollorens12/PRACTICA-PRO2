@@ -17,14 +17,17 @@ int main(){
         cin >> n >> m >> h;
         Area_Magatzem area(n,m,h); //t
         Cjt_Contenidors contenidor; //conj
+        cout << "#" << comando << " " << n << " " << m << " " << h << endl;
         cin >> comando;
-        while (comando != "fin" and comando != "crea_terminal") {
 
+        while (comando != "fin" and comando != "crea_terminal") {
+        cout << "#" << comando << " ";
         if (comando == "inserta_contenedor" or comando == "i"){
+
             string matricula;
             int l;
             cin >> matricula >> l;
-
+            cout << matricula << " " << l << endl;
             if(not contenidor.exists(matricula)){
                 Ubicacion u;
                 area.inserta_contenedor(matricula,l,u);
@@ -32,21 +35,27 @@ int main(){
                 contenidor.inserta_contenedor(matricula,s);
             }
 
-            else cout << "Error: el contenedor ya existe" << endl;
+            else cout << "error: el contenedor ya existe" << endl;
             
         }
 
         else if(comando == "retira_contenedor" or comando == "r"){
             string matricula;
             cin >> matricula;
+            cout << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
-            contenidor.retira_contenidor_cjt(matricula);
-            area.retira_contenidor(s);
+            if(s.ubic().hilera() != -1){
+                 contenidor.retira_contenidor_cjt(matricula);
+                area.retira_contenidor(s);
+            }
+            else cout << "error: el contenedor no existe" << endl;
+           
         }
 
         else if (comando == "donde"){
             string matricula;
             cin >> matricula;
+            cout << matricula << endl;
             contenidor.ubi(matricula).print();
             cout << endl;
         }
@@ -54,29 +63,47 @@ int main(){
         else if (comando == "longitud"){
             string matricula; 
             cin >> matricula;
+            cout << matricula << endl;
             if(contenidor.longitud(matricula) != -1) cout << contenidor.longitud(matricula) << endl;
-            else cout << "Error: el contenedor no existe" << endl;
+            else cout << "error: el contenedor no existe" << endl;
         }
 
         else if (comando == "contenedor_ocupa"){
             int i,j,k;
             cin >> i >> j >> k;
+            cout << i << " " << j << " " << k  << endl;
             area.print_contenedor_ocupa(i,j,k);
         }
 
-        else if (comando == "num_pisos")area.print_num_pisos();
-
-        else if (comando == "num_hileras") area.print_num_hileras();
-
-        else if (comando == "num_plazas") area.print_num_plazas();
+        else if (comando == "num_pisos"){
+            cout << endl;
+            area.print_num_pisos();
+        }
+        else if (comando == "num_hileras"){
+            cout << endl;
+            area.print_num_hileras();
+        }
+        else if (comando == "num_plazas"){
+            cout << endl;
+            area.print_num_plazas();
+        }
 
         // else if (comando == "area_espera") Area_Espera::print_a_espera();
 
-        else if (comando == "contenedores") contenidor.print_contenedores();
+        else if (comando == "contenedores"){
+            cout << endl;
+            contenidor.print_contenedores();
+        }
 
-        else if (comando == "area_almacenaje") area.print_area_almacenaje();
+        else if (comando == "area_almacenaje"){
+            cout << endl;
+            area.print_area_almacenaje();
+        }
         
-        else if (comando == "huecos") area.print_huecos();
+        else if (comando == "huecos"){
+            cout << endl;
+            area.print_huecos();
+        }
 
         cin >> comando;
         }
