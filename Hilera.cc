@@ -18,50 +18,6 @@ Hilera::Hilera(int m_i,int h_i){
 Hilera::~Hilera(){}
 // Consultores
 
-/** @brief Busca el millor lloc per afegir un contenidor en un fila determinada. Auxiliar de la funcio best_fit()
-      \pre <em>Cert</em>
-      \post S'ha retornat la posicio i la longitud del lloc que s'ha trobat, si no s'ha trobat cap retorna un segment amb l = 0
-*/ 
-//Segmento con longitud 0 = no se puede colocar el contenedor en esta hilera
-
-Ubicacion Hilera::best_fit_aux(Contenedor c, int hilera){
-      int m = mat[0].size();
-      int h = mat.size();
-
-      Ubicacion u; 
-      bool found = false;
-
-      int i = 0;
-      int l = c.longitud();
-
-      while(i < h and not found){
-            int j = 0;
-            while(j < m and not found){
-                  bool stop = false;
-                  int hueco_size = 0;
-                  
-                  while (j < m and mat[i][j].empty() and not stop) {
-
-                        if (i == 0) ++hueco_size;
-                        else if(not mat[i-1][j].empty())++hueco_size;
-                        else stop = true;
-                        
-                        if(hueco_size == l and not stop){
-                              found = true;
-                              stop = true;
-                              Ubicacion aux(hilera,((j-l) + 1),i);
-                              u = aux;
-                        }
-                        else if (not stop) ++j;
-                        
-                  }
-                  
-                  ++j;
-            }
-          ++i;
-      }
-      return u;
-}
 
 void Hilera::modifica_hilera(int m, int h,string matricula, int l){
      
@@ -115,7 +71,7 @@ void Hilera::huecos_hilera(int n,vector<Segmento>& v){
                   }
                   
                   else if(not mat[i][j].empty() and u.hilera() != -1){
-                        cout << mat[i][j] << endl;
+                        //cout << mat[i][j] << endl;
                         Ubicacion aux2(n,j,i);
                         int l = aux2.plaza() - u.plaza();
                         Segmento s(u,l);
@@ -146,7 +102,13 @@ void Hilera::huecos_hilera(int n,vector<Segmento>& v){
 }
 
 void Hilera::print_pos(int x, int y){
-      cout << mat[x][y] << endl;
+      
+      cout << mat[y][x] << endl;
+}
+
+string Hilera::elemen_pos(int x, int y){
+
+      return mat[y][x];
 }
 
 Row Hilera::operator[](int i) const {

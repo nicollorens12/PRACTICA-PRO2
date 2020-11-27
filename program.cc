@@ -2,6 +2,8 @@
     @brief Programa principal
 */
 #include "Area_Magatzem.hh"
+#include "Cjt_Contenidors.hh"
+#include "Huecos.hh"
 #ifndef NO_DIAGRAM
 #include <iostream>
 #endif
@@ -15,8 +17,11 @@ int main(){
     // comando == "crea_terminal N M H"
         int n,m,h;
         cin >> n >> m >> h;
+
         Area_Magatzem area(n,m,h); //t
         Cjt_Contenidors contenidor; //conj
+        Huecos huec(n,m);
+
         cout << "#" << comando << " " << n << " " << m << " " << h << endl;
         cin >> comando;
 
@@ -29,10 +34,13 @@ int main(){
             cin >> matricula >> l;
             cout << matricula << " " << l << endl;
             if(not contenidor.exists(matricula)){
-                Ubicacion u;
+                Ubicacion u = huec.best_fit(l);
+                u.print();
+                cout << endl;
                 area.inserta_contenedor(matricula,l,u);
                 Segmento s(u,l);
                 contenidor.inserta_contenedor(matricula,s);
+                huec.actualiza_huecos_insertar(s,area.altura());
             }
 
             else cout << "error: el contenedor ya existe" << endl;
@@ -45,8 +53,9 @@ int main(){
             cout << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
             if(s.ubic().hilera() != -1){
-                 contenidor.retira_contenidor_cjt(matricula);
+                contenidor.retira_contenidor_cjt(matricula);
                 area.retira_contenidor(s);
+                huec.actualiza_huecos_borrar(s,area.altura());
             }
             else cout << "error: el contenedor no existe" << endl;
            
@@ -102,7 +111,7 @@ int main(){
         
         else if (comando == "huecos"){
             cout << endl;
-            area.print_huecos();
+            huec.print_huecos();
         }
 
         cin >> comando;

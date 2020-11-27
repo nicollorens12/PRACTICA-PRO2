@@ -43,11 +43,11 @@ Hilera(int m,int h);
 
 // Consultores
 
-/** @brief Busca el millor lloc per afegir un contenidor en un fila determinada. Auxiliar de la funcio best_fit()
+/** @brief Retorna la matricula del contenidor que ocupa la posicio (x,y)
       \pre <em>Cert</em>
-      \post S'ha retornat la posicio i la longitud del lloc que s'ha trobat, si no s'ha trobat cap retorna un segment amb l = 0
+      \post S'ha retornat la posicio
 */
-Ubicacion best_fit_aux(Contenedor c,int hilera);
+string elemen_pos(int x, int y);
 
 // Modificadores
 
@@ -73,6 +73,10 @@ void print_hilera() const;
 */
 void huecos_hilera(int i,vector<Segmento>& v);
 
+/** @brief Imprimeix la matricula de la posicio (x,y)
+      \pre <em>Cert</em>
+      \post S'ha impres la matricula
+*/
 void print_pos(int x, int y);
 
 //Operadors 

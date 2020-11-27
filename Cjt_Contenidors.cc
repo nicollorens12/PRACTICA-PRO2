@@ -52,8 +52,9 @@ void Cjt_Contenidors::retira_contenidor_cjt(string m){
 void Cjt_Contenidors::print_contenedores() const{
     
     for (map<string,Segmento>::const_iterator it = cjt.begin(); it != cjt.end(); ++it){
-        cout << it->first << " (";
+        cout << it->first << "(";
         it->second.ubic().print();
-        cout << ", " << it->second.longitud() <<')' << endl;
+        cout << "," << it->second.longitud() <<')' << endl;
     }
+    cout << endl;
 }

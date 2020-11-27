@@ -9,7 +9,7 @@
 #include "Contenedor.hh"
 #include "Hilera.hh"
 #include "Area_Espera.hh"
-#include "Cjt_Contenidors.hh"
+#include "Huecos.hh"
 
 using namespace std;
 
@@ -22,7 +22,6 @@ private:
 
 int n,m,h;
 vector <Hilera> v;
-static bool space_sort(Segmento a, Segmento b);
 // Area_Espera a_espera;
 
 public:
@@ -47,12 +46,6 @@ Area_Magatzem(int n, int m, int h);
 
 //Consultores
 
-/** @brief Consultora del tamany total (N,M,H) del area magatzem
-      \pre <em>Cert</em>
-      \post El resultat és la terna <N,M,H>
-*/
-Ubicacion t_size();
-
 /** @brief Consultora del tamany N (N = cantidad de plazas)
       \pre <em>Cert</em>
       \post Retorna el enter N
@@ -71,16 +64,12 @@ int filas() const;
 */
 int altura() const;
 
-/** @brief Busca el millor lloc per afegir un contenidor al area magatzem
+/** @brief Retorna la matricula del contenidor de la ubicacio(i,j,k)
       \pre <em>Cert</em>
-      \post S'ha retornat la posicio i la longitud del lloc que s'ha trobat, si no s'ha trobat cap retorna un segment amb l = 0;
+      \post S'ha retornat la matricula
 */
-Ubicacion best_fit(Contenedor c);
 
-/** @brief Retorna els contenidors
-      \pre <em>Cert</em>
-      \post S'ha retornat el mapa de contenidors
-*/
+string contenedor_ocupa(int i, int j, int k);
 
 //Operadors
 
@@ -88,7 +77,7 @@ Ubicacion best_fit(Contenedor c);
       \pre <em>Cert</em>
       \post El contenidor s'ha afegit al cjt i a la matriu/llista i 
 */
-void inserta_contenedor(string m, int l,Ubicacion& u); // ADMENT COM A COMANDA i
+void inserta_contenedor(string m, int l, Ubicacion u); // ADMENT COM A COMANDA i
 
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
@@ -128,12 +117,6 @@ void print_contenedor_ocupa(int i,int j,int k);
       \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
 */
 void print_area_almacenaje(); // Si el numero de hileras es superior a nueve se vuelve a empezar por 0
-
-/** @brief Imprimeix una llista dels espais segons tamany de menor a major, si el tamany es igual, segons hilera i si es igual segons la plaça
-      \pre <em>Cert</em>
-      \post S'ha escrit els contenidors a l'area principal per fileres de forma bidimensional
-*/
-void print_huecos();
 
 
 };
