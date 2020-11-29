@@ -34,13 +34,27 @@ Area_Espera();
 */  
 ~Area_Espera();
 
+//Modificacdora
+/** @brief Inserta un element al area de espera
+      \pre <em>Cert</em>
+      \post S'ha insert un contenidor al principi de la llista
+*/
+void inserta_a_espera(Contenedor c);
+
+//Consultora
+/** @brief Consulta l'ultim elemento que ha entrat a la llista
+      \pre <em>Cert</em>
+      \post S'ha retornat l'ultim contenidor que ha entrat a la llista 
+*/
+Contenedor consulta_siguiente();
+
 //Entrada/Salida
 
 /** @brief Imprimeix l'area d'espera (matricula i longitud) en ordre de sortida
       \pre <em>Cert</em>
       \post S'ha impres l'area d'espera
 */  
-static void print_a_espera();
+void print_a_espera();
 
 private:
 

@@ -22,7 +22,7 @@ private:
 
 int n,m,h;
 vector <Hilera> v;
-// Area_Espera a_espera;
+Area_Espera a_espera;
 
 public:
 

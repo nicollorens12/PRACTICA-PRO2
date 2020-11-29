@@ -1,6 +1,7 @@
 #include "Area_Magatzem.hh"
 #include <iostream>
 
+
 using namespace std;
 
 Area_Magatzem::Area_Magatzem(int n_i, int m_i, int h_i){

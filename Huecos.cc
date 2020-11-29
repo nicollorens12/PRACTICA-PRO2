@@ -133,7 +133,7 @@ void Huecos::actualiza_huecos_insertar(Segmento s, int h){
 
 
 void Huecos::actualiza_huecos_borrar(Segmento s,int h){
-    // pair<long,pair<hilera,plasa>> Value: k
+    
 
     map<Clau,int>::const_iterator it = huec.begin();
     while(it->first.second.first != s.ubic().hilera() and (it->first.second.second != s.ubic().plaza() + s.longitud()) ) ++it;
@@ -142,29 +142,61 @@ void Huecos::actualiza_huecos_borrar(Segmento s,int h){
     while(it->first.second.first != s.ubic().hilera() and it->second != s.ubic().piso() and (it->first.first + it->first.second.second == s.ubic().plaza())) ++it_esq;
 
     
-    bool derecha_v;
-    bool izq_v;
-    if(it == huec.end()) derecha_v = true;
-    if(it_esq == huec.end()) izq_v = true;
+    bool derecha_v = true;
+    bool izq_v = true;
+    if(it == huec.end()) derecha_v = false;
+    if(it_esq == huec.end()) izq_v = false;
 
-    if(not derecha_v and not izq_v){ //SUMAMOS TODOS LOS FUCKING HUECOS
+    if(derecha_v and izq_v){ //SUMAMOS TODOS LOS FUCKING HUECOS
+        // pair<long,pair<hilera,plasa>> Value: k
+        Clau c;
+        c.first = it_esq->first.first + s.longitud() + it->first.first;
+        c.second.first = it->first.second.first;
+        c.second.second = it_esq->first.second.second;
+        int k = it_esq->second;
+        pair<Clau,int> aux;
+        aux.first = c;
+        aux.second = k;
+        huec.erase(it);
+        huec.erase(it_esq);
+        huec.insert(aux);
 
     }
-    else if(not derecha_v){ //SUMAMOS EL HUECO DE LA DERECHA
-
+    else if(derecha_v){ //SUMAMOS EL HUECO DE LA DERECHA
+        Clau c;
+        c.first = s.longitud() + it->first.first;
+        c.second.first = it->first.second.first;
+        c.second.second = s.ubic().plaza();
+        int k = it->second;
+        pair<Clau,int> aux;
+        aux.first = c;
+        aux.second = k;
+        huec.erase(it);
+        huec.insert(aux);
     }
-    else if(not izq_v){//SUMAMOS EL HUECO DE IZQUIERDA
-
+    else if(izq_v){//SUMAMOS EL HUECO DE IZQUIERDA
+        // pair<long,pair<hilera,plasa>> Value: k
+        Clau c;
+        c.first = it_esq->first.first + s.longitud();
+        c.second.first = it_esq->first.second.first;
+        c.second.second = it_esq->first.second.second;
+        int k = it_esq->second;
+        pair<Clau,int> aux;
+        aux.first = c;
+        aux.second = k;
+        huec.erase(it_esq);
+        huec.insert(aux);
     }
 
 
-    if(s.ubic().piso() < h){
+    if(s.ubic().piso()+1 < h){
 
         if(not derecha_v and not izq_v){ // MIRAMOS HUECOS DE ARRIBA ENTEROS
             
         }
         else if(not derecha_v){ //MIRAMOS HUECOS ARRIBA DERECHA
-
+            it = huec.begin();
+            while(it->first.second.first != s.ubic().hilera() and it->first.second.second != s.ubic().plaza() and it->second != s.ubic().piso()) ++it;
         }
         else if(not izq_v){ // MIRAMOS HUECOS ARRIBA IZQ
 
