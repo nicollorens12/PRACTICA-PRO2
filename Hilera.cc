@@ -28,6 +28,10 @@ void Hilera::modifica_hilera(int m, int h,string matricula, int l){
 
 }
 
+void Hilera::borra_elem(int m, int h){
+      mat[h][m] = "";
+}
+
 //Entrada/Salida
 
 /** @brief Imprimeix la posicio i la matricula dels contenidors de la filera. Auxiliar de la funcio print_area_almacenaje()
@@ -51,6 +55,7 @@ void Hilera::print_hilera() const {
             if (k%10 == 0) aux_counter = 0;
             cout << aux_counter;
             aux_counter++;
+            
       }
       cout << endl;
 }
@@ -59,7 +64,7 @@ void Hilera::print_hilera() const {
       \pre <em>Cert</em>
       \post S'ha impres els forats disponibles a la filera
 */
-void Hilera::huecos_hilera(int n,vector<Segmento>& v){
+void Hilera::huecos_hilera(int n,vector<Segmento>& v) const{
       int m = mat[0].size();
       int h = mat.size();
       Ubicacion u;
@@ -106,11 +111,17 @@ void Hilera::print_pos(int x, int y){
       cout << mat[y][x] << endl;
 }
 
-string Hilera::elemen_pos(int x, int y){
+string Hilera::elemen_pos(int y, int x){
 
-      return mat[y][x];
+      return mat[x][y];
 }
 
 Row Hilera::operator[](int i) const {
       return mat[i];
+}
+
+void Hilera::borra_contenidor_hilera(Segmento s){
+      int plaza = s.ubic().plaza();
+      int piso = s.ubic().piso();
+      for(int i = plaza; i < plaza + s.longitud(); ++i) mat[piso][i] = "";
 }

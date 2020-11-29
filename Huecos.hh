@@ -38,17 +38,36 @@ Huecos(int n, int m);
 */
 Ubicacion best_fit(int l);
 
+/** @brief Transforma un segmento en un pair del mapa implicit de la clase huecos
+      \pre <em>Cert</em>
+      \post S'ha un pair amb clau i int extret del segment s
+*/
+pair<Clau,int> segmento_a_clau(Segmento s);
+
 //Modificadora
-void actualiza_huecos_insertar(Segmento s, int h);
-void actualiza_huecos_borrar(Segmento s, int h);
+
+/** @brief Actualitza el mapa del forats despres de afegir un contenidor
+      \pre <em>Cert</em>
+      \post S'ha actualitzat el mapa 
+*/
+void actualiza_huecos_insertar(vector<Segmento> huecos_hilera);
+
+/** @brief Actualitza el mapa del forats despres de eliminar un contenidor
+      \pre <em>Cert</em>
+      \post S'ha actualitzat el mapa 
+*/
+void actualiza_huecos_borrar(vector<Segmento> huecos_hilera);
+
+
 //Operador
 
 //Consultora
 /** @brief Actualitza el mapa del forats
       \pre <em>Cert</em>
       \post S'ha actualitzat el mapa 
+
+void actualiza_huecos(Area_Magatzem& a_m);
 */
-void actualiza_huecos(Segmento s,string comando);
 
 //Entrada/Sortida
 
@@ -63,6 +82,7 @@ private:
 // map<pair<l,pair<i,j>>,h>
 map<Clau,int> huec;
 Ubicacion extrae_ubi(map<Clau,int>::const_iterator it);
+map<Clau,int>::const_iterator bin_search(int l, int hil, int pla);
 
 };
 

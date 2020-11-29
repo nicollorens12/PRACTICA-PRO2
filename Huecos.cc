@@ -25,48 +25,99 @@ Huecos::Huecos(int n, int m){
 Huecos::~Huecos(){}
 
 Ubicacion Huecos::extrae_ubi(map<Clau,int>::const_iterator it){
+    
     return Ubicacion (it->first.second.first,it->first.second.second, it->second);
 }
 
 Ubicacion Huecos::best_fit(int l){
     map<Clau,int>::const_iterator it;
-
+    it = huec.begin();
+   
     while(it != huec.end()){
-        if(it->first.first > l) return extrae_ubi(it);
+        
+        if(it->first.first == l) return extrae_ubi(it);
 
-        else if(it->first.first == l) return extrae_ubi(it);
+        else if(it->first.first > l) return extrae_ubi(it);
 
         else ++it;
     }
 
     return Ubicacion();
 }
-// pair<long,pair<hilera,plasa>> Value: k
-void Huecos::actualiza_huecos_insertar(Segmento s, int h){
 
+pair<Clau,int> Huecos::segmento_a_clau(Segmento s){
+    Clau c;
+    c.first = s.longitud();
+    c.second.first = s.ubic().hilera();
+    c.second.second = s.ubic().plaza();
+    int k = s.ubic().piso();
+    pair<Clau,int> aux;
+    aux.first = c;
+    aux.second = k;
+    return aux;
+}
+
+// pair<long,pair<hilera,plasa>> Value: k 
+void Huecos::actualiza_huecos_insertar(vector<Segmento> huecos_hilera) {
+
+    map<Clau,int>::const_iterator it = huec.begin();
+    int hilera = huecos_hilera[0].ubic().hilera();
+
+    while(it != huec.end() and it->first.second.first != hilera) ++it;
+    while(it != huec.end() and it->first.second.first == hilera) it = huec.erase(it);
+   
+    int size = huecos_hilera.size();
+    for(int i = 0; i < size; ++i){
+        pair<Clau,int> elem = segmento_a_clau(huecos_hilera[i]);
+        huec.insert(elem);
+    }
+    
+    /*
     map<Clau,int>::const_iterator it = huec.begin();
     bool found = false;
 
     while(not found and it != huec.end()){
         if(it->first.second.first == s.ubic().hilera() and it->first.second.second == s.ubic().plaza()) found = true;
+        else ++it;
     }
-
+    
+    //TROBA BE EL IT
+    bool exacte = false;
+    map<Clau,int>::const_iterator it_prova;
     if(found){
         Clau p = it->first;
         p.first -= s.longitud();
 
-        if(p.first -= s.longitud() != 0){
+        if(p.first != 0){
+            
             p.second.second += s.longitud();
-
             pair<Clau,int> aux;
             aux.first = p;
             aux.second = it->second;
 
             huec.erase(it);
             huec.insert(aux);
+            it_prova = huec.find(p);
+            cout << "nabo " << it_prova->first.second.first << ' ' << it_prova->first.second.second << ' ' << it_prova->second << ' ' << it_prova->first.first << endl;
+            //INSERTA PERF EL HUECO QUE TOCA
+        }
+        else{
+            exacte = true;
+            huec.erase(it);
+            Clau c;
+            c.first = s.longitud();
+            c.second.first = s.ubic().hilera();
+            c.second.second = s.ubic().plaza();
+            pair<Clau,int> aux;
+            aux.first = c;
+            aux.second = s.ubic().piso()+1;
+            huec.insert(aux);
         }
     }
 
+    // cout << it_prova->first.first << ' ' << it_prova->first.second.first << ' ' << it_prova->first.second.second << endl;
+    if(not exacte){
+        
     if(s.ubic().piso()+1 < h){
         // pair<long,pair<hilera,plasa>> Value: k
         
@@ -86,9 +137,10 @@ void Huecos::actualiza_huecos_insertar(Segmento s, int h){
             }
             
         }
-
+        cout << "FLAG1" << endl;
         if(it != huec.end()){
             if(it_esq != huec.end()){ //SUMAR IZQ Y DER
+                
                 Clau c;
                 c.first = it->first.first + it_esq->first.first + s.longitud();
                 c.second.first = it_esq->first.second.first;
@@ -98,10 +150,15 @@ void Huecos::actualiza_huecos_insertar(Segmento s, int h){
                 aux.first = c;
                 aux.second = k;
                 huec.erase(it);
+                cout << "FLAGFERRAN1" << endl;
                 huec.erase(it_esq);
+                
                 huec.insert(aux);
+               
             }
+
             else{ // SOLO SUMAR DERECHA
+                cout << "FLAG3" << endl;
                 Clau c;
                 c.first = it->first.first  + s.longitud();
                 c.second.first = s.ubic().hilera();
@@ -115,6 +172,7 @@ void Huecos::actualiza_huecos_insertar(Segmento s, int h){
             }
         }
         else if(it_esq != huec.end()){ //SOLO SUMAR IZQ
+            cout << "FLAG4" << endl;
             Clau c;
             c.first = it_esq->first.first  + s.longitud();
             c.second.first = it_esq->first.second.first;
@@ -128,79 +186,23 @@ void Huecos::actualiza_huecos_insertar(Segmento s, int h){
         }
             
     }
-
+    }
+    */
 }
 
 
-void Huecos::actualiza_huecos_borrar(Segmento s,int h){
-    
-
+void Huecos::actualiza_huecos_borrar(vector<Segmento> huecos_hilera){
+    // pair<long,pair<hilera,plasa>> Value: k
     map<Clau,int>::const_iterator it = huec.begin();
-    while(it->first.second.first != s.ubic().hilera() and (it->first.second.second != s.ubic().plaza() + s.longitud()) ) ++it;
+    int hilera = huecos_hilera[0].ubic().hilera();
 
-    map<Clau,int>::const_iterator it_esq = huec.begin();
-    while(it->first.second.first != s.ubic().hilera() and it->second != s.ubic().piso() and (it->first.first + it->first.second.second == s.ubic().plaza())) ++it_esq;
-
-    
-    bool derecha_v = true;
-    bool izq_v = true;
-    if(it == huec.end()) derecha_v = false;
-    if(it_esq == huec.end()) izq_v = false;
-
-    if(derecha_v and izq_v){ //SUMAMOS TODOS LOS FUCKING HUECOS
-        // pair<long,pair<hilera,plasa>> Value: k
-        Clau c;
-        c.first = it_esq->first.first + s.longitud() + it->first.first;
-        c.second.first = it->first.second.first;
-        c.second.second = it_esq->first.second.second;
-        int k = it_esq->second;
-        pair<Clau,int> aux;
-        aux.first = c;
-        aux.second = k;
-        huec.erase(it);
-        huec.erase(it_esq);
-        huec.insert(aux);
-
-    }
-    else if(derecha_v){ //SUMAMOS EL HUECO DE LA DERECHA
-        Clau c;
-        c.first = s.longitud() + it->first.first;
-        c.second.first = it->first.second.first;
-        c.second.second = s.ubic().plaza();
-        int k = it->second;
-        pair<Clau,int> aux;
-        aux.first = c;
-        aux.second = k;
-        huec.erase(it);
-        huec.insert(aux);
-    }
-    else if(izq_v){//SUMAMOS EL HUECO DE IZQUIERDA
-        // pair<long,pair<hilera,plasa>> Value: k
-        Clau c;
-        c.first = it_esq->first.first + s.longitud();
-        c.second.first = it_esq->first.second.first;
-        c.second.second = it_esq->first.second.second;
-        int k = it_esq->second;
-        pair<Clau,int> aux;
-        aux.first = c;
-        aux.second = k;
-        huec.erase(it_esq);
-        huec.insert(aux);
-    }
-
-
-    if(s.ubic().piso()+1 < h){
-
-        if(not derecha_v and not izq_v){ // MIRAMOS HUECOS DE ARRIBA ENTEROS
-            
-        }
-        else if(not derecha_v){ //MIRAMOS HUECOS ARRIBA DERECHA
-            it = huec.begin();
-            while(it->first.second.first != s.ubic().hilera() and it->first.second.second != s.ubic().plaza() and it->second != s.ubic().piso()) ++it;
-        }
-        else if(not izq_v){ // MIRAMOS HUECOS ARRIBA IZQ
-
-        }
+    while(it != huec.end() and it->first.second.first != hilera) ++it;
+    while(it != huec.end() and it->first.second.first == hilera) it = huec.erase(it);
+   
+    int size = huecos_hilera.size();
+    for(int i = 0; i < size; ++i){
+        pair<Clau,int> elem = segmento_a_clau(huecos_hilera[i]);
+        huec.insert(elem);
     }
 
 }
@@ -215,3 +217,8 @@ void Huecos::print_huecos(){
     }
     cout << endl;
 }
+
+/*map<Clau,int>::const_iterator Huecos::bin_search(int l, int hil, int pla){
+    
+}
+*/

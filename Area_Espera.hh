@@ -54,7 +54,7 @@ Contenedor consulta_siguiente();
       \pre <em>Cert</em>
       \post S'ha impres l'area d'espera
 */  
-void print_a_espera();
+void print_a_espera() const;
 
 private:
 

@@ -27,6 +27,7 @@ int main(){
 
         while (comando != "fin" and comando != "crea_terminal") {
         cout << "#" << comando << " ";
+
         if (comando == "inserta_contenedor" or comando == "i"){
 
             string matricula;
@@ -40,7 +41,10 @@ int main(){
                 area.inserta_contenedor(matricula,l,u);
                 Segmento s(u,l);
                 contenidor.inserta_contenedor(matricula,s);
-                huec.actualiza_huecos_insertar(s,area.altura());
+                vector<Segmento> v_huecos;
+                area.huecos(v_huecos);
+                huec.actualiza_huecos_insertar(v_huecos); // PETA AQUI
+                
             }
 
             else cout << "error: el contenedor ya existe" << endl;
@@ -53,9 +57,12 @@ int main(){
             cout << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
             if(s.ubic().hilera() != -1){
+                area.retira_contenidor(s,contenidor);
+                vector<Segmento> v_huecos;
+                area.huecos(v_huecos);
+                huec.actualiza_huecos_borrar(v_huecos);
                 contenidor.retira_contenidor_cjt(matricula);
-                area.retira_contenidor(s);
-                huec.actualiza_huecos_borrar(s,area.altura());
+
             }
             else cout << "error: el contenedor no existe" << endl;
            
@@ -97,7 +104,11 @@ int main(){
             area.print_num_plazas();
         }
 
-        // else if (comando == "area_espera") Area_Espera::print_a_espera();
+        else if (comando == "area_espera"){
+            cout << endl;
+            area.print_area_espera();
+
+        }
 
         else if (comando == "contenedores"){
             cout << endl;

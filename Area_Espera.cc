@@ -5,9 +5,7 @@
 
 using namespace std;
 
-Area_Espera::Area_Espera(){
-    l_espera = list<Contenedor> l;
-}
+Area_Espera::Area_Espera(){}
 
 Area_Espera::~Area_Espera(){}
 
@@ -23,9 +21,12 @@ Contenedor Area_Espera::consulta_siguiente(){
     return Contenedor();
 }
 
-void Area_Espera::print_a_espera(){
-    for(list<Contenedor>::const_iterator it = l_espera.begin(); it != l_espera.end(); ++it){
-        cout << it->matricula() << " (" << it->longitud() << ")" << endl;
+void Area_Espera::print_a_espera() const{
+    if(l_espera.size() != 0){
+        for(list<Contenedor>::const_iterator it = l_espera.begin(); it != l_espera.end(); ++it){
+            cout << it->matricula() << " (" << it->longitud() << ")" << endl;
+        }
     }
+    else cout << endl;
 }
 

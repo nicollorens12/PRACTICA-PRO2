@@ -10,6 +10,7 @@
 #include "Hilera.hh"
 #include "Area_Espera.hh"
 #include "Huecos.hh"
+#include "Cjt_Contenidors.hh"
 
 using namespace std;
 
@@ -23,6 +24,8 @@ private:
 int n,m,h;
 vector <Hilera> v;
 Area_Espera a_espera;
+
+void borra_contenidor(Segmento s); //Esborra sense mirar si esta enterrat (aux de retira_contenidor)
 
 public:
 
@@ -71,24 +74,37 @@ int altura() const;
 
 string contenedor_ocupa(int i, int j, int k);
 
+/** @brief Retorna un vector amb els forats disponibles al area de magatzem
+      \pre <em>Cert</em>
+      \post El vector conte els forats del terminal
+*/
+void huecos(vector<Segmento>& v_huecos) const;
+
+/** @brief Imprimeix l'area d'espera
+      \pre <em>Cert</em>
+      \post S'ha impres l'area d'espera
+*/
+void print_area_espera() const;
+
+
 //Operadors
 
 /** @brief Inserta un contenidor al terminal 
       \pre <em>Cert</em>
       \post El contenidor s'ha afegit al cjt i a la matriu/llista i 
 */
-void inserta_contenedor(string m, int l, Ubicacion u); // ADMENT COM A COMANDA i
+void inserta_contenedor(string m, int l, Ubicacion u); 
 
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */
-void retira_contenidor(Segmento s); // ADMENT COM A COMANDA r
+void retira_contenidor(Segmento s,Cjt_Contenidors& cjt); 
+
 
 
 
 // Entrada/Sortida
-
 
 void print_num_hileras();
 

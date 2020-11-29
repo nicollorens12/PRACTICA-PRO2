@@ -57,6 +57,18 @@ string elemen_pos(int x, int y);
 */
 void modifica_hilera(int m, int h, string matricula, int l);
 
+/** @brief Borra el contenidor de la hilera
+      \pre <em>Cert</em>
+      \post La ubicacio del contenidor es buida 
+*/
+void borra_contenidor_hilera(Segmento s);
+
+/** @brief Borra la la matricula d'una posicio determinada
+      \pre <em>Cert</em>
+      \post La ubicacio del (m,h) es buida 
+*/
+void borra_elem(int m, int h);
+
 
 
 //Entrada/Salida
@@ -67,11 +79,11 @@ void modifica_hilera(int m, int h, string matricula, int l);
 */
 void print_hilera() const; 
 
-/** @brief Imprimeix els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
+/** @brief Guarda els forats disponibles (posicio i longitud) a la filera. Auxiliar de la funcio print_huecos()
       \pre <em>Cert</em>
-      \post S'ha impres els forats disponibles a la filera
+      \post S'ha guardat els forats disponibles a la filera en un vector
 */
-void huecos_hilera(int i,vector<Segmento>& v);
+void huecos_hilera(int n,vector<Segmento>& v) const;
 
 /** @brief Imprimeix la matricula de la posicio (x,y)
       \pre <em>Cert</em>
@@ -84,6 +96,7 @@ Row operator[](int i) const;
 
 private:
     Matrix mat;
+    
     
 };
 
