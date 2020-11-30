@@ -58,15 +58,20 @@ pair<Clau,int> Huecos::segmento_a_clau(Segmento s){
 }
 
 // pair<long,pair<hilera,plasa>> Value: k 
-void Huecos::actualiza_huecos_insertar(vector<Segmento> huecos_hilera) {
+void Huecos::actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera) {
 
     map<Clau,int>::const_iterator it = huec.begin();
-    int hilera = huecos_hilera[0].ubic().hilera();
-
-    while(it != huec.end() and it->first.second.first != hilera) ++it;
-    while(it != huec.end() and it->first.second.first == hilera) it = huec.erase(it);
-   
     int size = huecos_hilera.size();
+    //cout << it->first.second.first << endl;
+    while(it != huec.end() and it->first.second.first != hilera) ++it;
+    while(it != huec.end() and it->first.second.first == hilera){
+        //cout << "FLAG" << endl;
+        //cout << it->first.second.first << ' ' << it->first.second.second << ' ' << it->second << endl;
+        it = huec.erase(it);
+    
+    }
+   
+    
     for(int i = 0; i < size; ++i){
         pair<Clau,int> elem = segmento_a_clau(huecos_hilera[i]);
         huec.insert(elem);
@@ -205,6 +210,10 @@ void Huecos::actualiza_huecos_borrar(vector<Segmento> huecos_hilera){
         huec.insert(elem);
     }
 
+}
+
+int Huecos::tamany(){
+    return huec.size();
 }
 
 void Huecos::print_huecos(){

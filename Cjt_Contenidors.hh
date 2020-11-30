@@ -77,6 +77,12 @@ void inserta_contenedor(string m, Segmento s);
 */
 void retira_contenidor_cjt(string m); 
 
+/** @brief Modifica un contenidor del terminal
+      \pre <em>Cert</em>
+      \post El contenidor s'ha modificat
+*/
+void modifica_contenidor_cjt(string m,Segmento s); 
+
 //Entrada/Sortida
 /** @brief Imprimeix la llista dels contenidors del terminal en ordre de matricula amb la seva posicio i longitud
       \pre <em>Cert</em>

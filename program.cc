@@ -28,7 +28,7 @@ int main(){
         while (comando != "fin" and comando != "crea_terminal") {
         cout << "#" << comando << " ";
 
-        if (comando == "inserta_contenedor" or comando == "i"){
+        if (comando == "inserta_contenedor" or comando == "i"){ 
 
             string matricula;
             int l;
@@ -36,14 +36,25 @@ int main(){
             cout << matricula << " " << l << endl;
             if(not contenidor.exists(matricula)){
                 Ubicacion u = huec.best_fit(l);
-                u.print();
-                cout << endl;
-                area.inserta_contenedor(matricula,l,u);
-                Segmento s(u,l);
-                contenidor.inserta_contenedor(matricula,s);
-                vector<Segmento> v_huecos;
-                area.huecos(v_huecos);
-                huec.actualiza_huecos_insertar(v_huecos); // PETA AQUI
+                if(u.hilera() == -1){
+                    Ubicacion u_aux(-1,0,0);
+                    u_aux.print();
+                    cout << endl;
+                    Segmento s(u_aux,l);
+                    area.inserta_contenedor_area_espera(matricula,l);
+                    contenidor.inserta_contenedor(matricula,s);
+                }
+                else{
+                    u.print();
+                    cout << endl;
+                    area.inserta_contenedor(matricula,l,u);
+                    Segmento s(u,l);
+                    contenidor.inserta_contenedor(matricula,s);
+                    vector<Segmento> v_huecos;
+                    area.huecos(v_huecos);
+                    huec.actualiza_huecos_insertar(v_huecos,n-1);
+                    area.inserta_contenidors_en_espera(huec,contenidor);
+                }
                 
             }
 
@@ -51,19 +62,29 @@ int main(){
             
         }
 
-        else if(comando == "retira_contenedor" or comando == "r"){
+        else if(comando == "retira_contenedor" or comando == "r"){ //FALTA POR HACER COMPROBACIONES DEL A_ESPERA CUANDO RETIRAMOS
             string matricula;
             cin >> matricula;
             cout << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
-            if(s.ubic().hilera() != -1){
+
+            if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){
+              
+                area.retira_contenedor_area_espera(matricula,contenidor.consulta_contenidor(matricula).longitud());
+       
+                contenidor.retira_contenidor_cjt(matricula);
+            }
+
+            else if(s.ubic().plaza() != -1){
                 area.retira_contenidor(s,contenidor);
                 vector<Segmento> v_huecos;
                 area.huecos(v_huecos);
                 huec.actualiza_huecos_borrar(v_huecos);
+                area.inserta_contenidors_en_espera(huec,contenidor);
                 contenidor.retira_contenidor_cjt(matricula);
-
+                
             }
+    
             else cout << "error: el contenedor no existe" << endl;
            
         }
@@ -107,7 +128,6 @@ int main(){
         else if (comando == "area_espera"){
             cout << endl;
             area.print_area_espera();
-
         }
 
         else if (comando == "contenedores"){

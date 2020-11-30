@@ -41,12 +41,37 @@ Area_Espera();
 */
 void inserta_a_espera(Contenedor c);
 
-//Consultora
-/** @brief Consulta l'ultim elemento que ha entrat a la llista
+/** @brief Retira un element al area de espera (en base a un iterador)
       \pre <em>Cert</em>
-      \post S'ha retornat l'ultim contenidor que ha entrat a la llista 
+      \post S'ha retirat un contenidor de la llista i retornat un iterador al seguent element
 */
-Contenedor consulta_siguiente();
+list<Contenedor>::iterator retira_a_espera(list<Contenedor>::iterator);
+
+/** @brief Retira un contenidor del area de espera
+      \pre <em>Cert</em>
+      \post S'ha retirat un contenidor de la llista
+*/
+void retira_elem_a_espera(Contenedor c);
+
+//Consultora
+
+/** @brief Consulta el element que apunta l'iterador
+      \pre <em>Cert</em>
+      \post S'ha retornat el contenidor indicat per l'iterador
+*/
+Contenedor consulta_element(list<Contenedor>::iterator it);
+
+/** @brief Retorna un iterador al principi de la llista
+      \pre <em>Cert</em>
+      \post S'ha el iterador
+*/
+list<Contenedor>::iterator inici();
+
+/** @brief Retorna un iterador al final de la llista
+      \pre <em>Cert</em>
+      \post S'ha el iterador
+*/
+list<Contenedor>::iterator final();
 
 //Entrada/Salida
 

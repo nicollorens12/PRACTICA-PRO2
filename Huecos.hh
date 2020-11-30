@@ -4,10 +4,10 @@
 #include "Ubicacion.hh"
 #include "Segmento.hh"
 #include "Contenedor.hh"
-#include "Area_Magatzem.hh"
 
 #ifndef NO_DIAGRAM
 #include <map>
+#include <vector>
 #endif
 
 typedef pair<int,pair<int,int>> Clau;
@@ -50,7 +50,7 @@ pair<Clau,int> segmento_a_clau(Segmento s);
       \pre <em>Cert</em>
       \post S'ha actualitzat el mapa 
 */
-void actualiza_huecos_insertar(vector<Segmento> huecos_hilera);
+void actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera);
 
 /** @brief Actualitza el mapa del forats despres de eliminar un contenidor
       \pre <em>Cert</em>
@@ -62,12 +62,11 @@ void actualiza_huecos_borrar(vector<Segmento> huecos_hilera);
 //Operador
 
 //Consultora
-/** @brief Actualitza el mapa del forats
+/** @brief Consulta el tamany del mapa
       \pre <em>Cert</em>
-      \post S'ha actualitzat el mapa 
-
-void actualiza_huecos(Area_Magatzem& a_m);
+      \post S'ha retornat el tamany 
 */
+int tamany();
 
 //Entrada/Sortida
 

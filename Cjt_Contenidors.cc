@@ -49,6 +49,14 @@ void Cjt_Contenidors::retira_contenidor_cjt(string m){
     cjt.erase(m);
 }
 
+void Cjt_Contenidors::modifica_contenidor_cjt(string m,Segmento s){
+    pair<string,Segmento> p;
+    p.first = m;
+    p.second = s;
+    cjt.erase(m);
+    cjt.insert(p);
+}
+
 void Cjt_Contenidors::print_contenedores() const{
     
     for (map<string,Segmento>::const_iterator it = cjt.begin(); it != cjt.end(); ++it){

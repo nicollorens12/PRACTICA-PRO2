@@ -26,6 +26,7 @@ vector <Hilera> v;
 Area_Espera a_espera;
 
 void borra_contenidor(Segmento s); //Esborra sense mirar si esta enterrat (aux de retira_contenidor)
+void borra_encima_afegeix_a_espera(Segmento s,Cjt_Contenidors& cjt);
 
 public:
 
@@ -95,11 +96,29 @@ void print_area_espera() const;
 */
 void inserta_contenedor(string m, int l, Ubicacion u); 
 
+/** @brief Inserta un contenidor al area de espera
+      \pre <em>Cert</em>
+      \post El contenidor s'ha afegit al area d'espera
+*/
+void inserta_contenedor_area_espera(string m, int l);
+
+/** @brief Retira un contenidor del area de espera
+      \pre <em>Cert</em>
+      \post El contenidor s'ha retirat del area d'espera
+*/
+void retira_contenedor_area_espera(string m, int l);
+
 /** @brief Elimina un contenidor del terminal
       \pre <em>Cert</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */
-void retira_contenidor(Segmento s,Cjt_Contenidors& cjt); 
+void retira_contenidor(Segmento s,Cjt_Contenidors& cjt);
+
+/** @brief Inserta tots els contidors que es pugui del area d'espera
+      \pre <em>Cert</em>
+      \post S'han insertat els contenidors que hi cabien del area d'espera al area de magatzem
+**/
+void inserta_contenidors_en_espera(Huecos& huec,Cjt_Contenidors& cjt);
 
 
 

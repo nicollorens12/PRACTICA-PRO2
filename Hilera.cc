@@ -123,5 +123,9 @@ Row Hilera::operator[](int i) const {
 void Hilera::borra_contenidor_hilera(Segmento s){
       int plaza = s.ubic().plaza();
       int piso = s.ubic().piso();
+      /*for(int k = plaza; k < plaza + s.longitud(); ++k){
+            if(not elemen_pos(piso+1,k).empty()) borra_contenidor_hilera(Segmento(Ubicacion(),))
+      }
+      */
       for(int i = plaza; i < plaza + s.longitud(); ++i) mat[piso][i] = "";
 }
