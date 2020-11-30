@@ -32,8 +32,12 @@ int Area_Magatzem::altura() const{
 
 void Area_Magatzem::huecos(vector<Segmento>& v_huecos) const{
       for(int i = 0; i < n; ++i){
-           v[i].huecos_hilera(n-1,v_huecos);
+           v[i].huecos_hilera(i,v_huecos);
       }
+}
+
+void Area_Magatzem::huecos_hilera(vector<Segmento>& v_huecos,int hilera) const{
+      v[hilera].huecos_hilera(hilera,v_huecos);
 }
 
 //Operadors
@@ -135,7 +139,7 @@ void Area_Magatzem::inserta_contenidors_en_espera(Huecos& huec, Cjt_Contenidors&
                   cjt.modifica_contenidor_cjt(matricula,s);
                   vector<Segmento> v_huecos;
                   huecos(v_huecos);
-                  huec.actualiza_huecos_borrar(v_huecos);
+                  huec.actualiza_huecos_borrar(v_huecos,u.hilera());
                   it = a_espera.inici();
             }
             else ++it;        

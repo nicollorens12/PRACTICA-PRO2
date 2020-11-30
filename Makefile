@@ -36,4 +36,4 @@ clean:
 	rm *.exe
 
 practica.tar:
-	tar -cvf practica.tar *.cc *.hh Makefile
+	tar -cvf practica.tar *.cc *.hh html.zip Makefile

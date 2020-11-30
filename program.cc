@@ -26,14 +26,14 @@ int main(){
         cin >> comando;
 
         while (comando != "fin" and comando != "crea_terminal") {
-        cout << "#" << comando << " ";
+        cout << "#" << comando;
 
         if (comando == "inserta_contenedor" or comando == "i"){ 
 
             string matricula;
             int l;
             cin >> matricula >> l;
-            cout << matricula << " " << l << endl;
+            cout << " " << matricula << " " << l << endl;
             if(not contenidor.exists(matricula)){
                 Ubicacion u = huec.best_fit(l);
                 if(u.hilera() == -1){
@@ -52,7 +52,13 @@ int main(){
                     contenidor.inserta_contenedor(matricula,s);
                     vector<Segmento> v_huecos;
                     area.huecos(v_huecos);
-                    huec.actualiza_huecos_insertar(v_huecos,n-1);
+                    /*cout << "ESTOS SON LOS HUECOS QUE DEVUELVE" << endl << endl;
+                    for(int i = 0; i < v_huecos.size(); ++i){
+                        v_huecos[i].print();
+                        cout << endl;
+                    }
+                    */
+                    huec.actualiza_huecos_insertar(v_huecos,u.hilera());
                     area.inserta_contenidors_en_espera(huec,contenidor);
                 }
                 
@@ -62,13 +68,13 @@ int main(){
             
         }
 
-        else if(comando == "retira_contenedor" or comando == "r"){ //FALTA POR HACER COMPROBACIONES DEL A_ESPERA CUANDO RETIRAMOS
+        else if(comando == "retira_contenedor" or comando == "r"){ 
             string matricula;
             cin >> matricula;
-            cout << matricula << endl;
+            cout << " " << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
 
-            if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){
+            if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){ //ESTA EN EL AREA DE ESPERA??
               
                 area.retira_contenedor_area_espera(matricula,contenidor.consulta_contenidor(matricula).longitud());
        
@@ -78,8 +84,8 @@ int main(){
             else if(s.ubic().plaza() != -1){
                 area.retira_contenidor(s,contenidor);
                 vector<Segmento> v_huecos;
-                area.huecos(v_huecos);
-                huec.actualiza_huecos_borrar(v_huecos);
+                area.huecos_hilera(v_huecos,s.ubic().hilera());
+                huec.actualiza_huecos_borrar(v_huecos,s.ubic().hilera());
                 area.inserta_contenidors_en_espera(huec,contenidor);
                 contenidor.retira_contenidor_cjt(matricula);
                 
@@ -92,7 +98,7 @@ int main(){
         else if (comando == "donde"){
             string matricula;
             cin >> matricula;
-            cout << matricula << endl;
+            cout << " " << matricula << endl;
             contenidor.ubi(matricula).print();
             cout << endl;
         }
@@ -100,7 +106,7 @@ int main(){
         else if (comando == "longitud"){
             string matricula; 
             cin >> matricula;
-            cout << matricula << endl;
+            cout << " " << matricula << endl;
             if(contenidor.longitud(matricula) != -1) cout << contenidor.longitud(matricula) << endl;
             else cout << "error: el contenedor no existe" << endl;
         }
@@ -108,7 +114,7 @@ int main(){
         else if (comando == "contenedor_ocupa"){
             int i,j,k;
             cin >> i >> j >> k;
-            cout << i << " " << j << " " << k  << endl;
+            cout << " " << i << " " << j << " " << k  << endl;
             area.print_contenedor_ocupa(i,j,k);
         }
 
@@ -133,6 +139,7 @@ int main(){
         else if (comando == "contenedores"){
             cout << endl;
             contenidor.print_contenedores();
+            cout << endl;
         }
 
         else if (comando == "area_almacenaje"){

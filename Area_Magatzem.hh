@@ -81,6 +81,12 @@ string contenedor_ocupa(int i, int j, int k);
 */
 void huecos(vector<Segmento>& v_huecos) const;
 
+/** @brief Retorna un vector amb els forats disponibles a la hilera
+      \pre <em>Cert</em>
+      \post El vector conte els forats de la hilera
+*/
+void huecos_hilera(vector<Segmento>& v_huecos,int hilera) const;
+
 /** @brief Imprimeix l'area d'espera
       \pre <em>Cert</em>
       \post S'ha impres l'area d'espera

@@ -196,10 +196,9 @@ void Huecos::actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera
 }
 
 
-void Huecos::actualiza_huecos_borrar(vector<Segmento> huecos_hilera){
+void Huecos::actualiza_huecos_borrar(vector<Segmento> huecos_hilera, int hilera){
     // pair<long,pair<hilera,plasa>> Value: k
     map<Clau,int>::const_iterator it = huec.begin();
-    int hilera = huecos_hilera[0].ubic().hilera();
 
     while(it != huec.end() and it->first.second.first != hilera) ++it;
     while(it != huec.end() and it->first.second.first == hilera) it = huec.erase(it);

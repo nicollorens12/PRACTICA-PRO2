@@ -42,7 +42,7 @@ void Hilera::print_hilera() const {
       for(int i = mat.size() - 1; i >= 0; --i){
       cout << i << " ";
             for (int j = 0; j < mat[0].size(); ++j){
-                  if (not mat[i][j].empty()) cout << mat[i][j];
+                  if (not mat[i][j].empty()) cout << mat[i][j][0];
                   else cout << " ";
             }
             cout << endl;

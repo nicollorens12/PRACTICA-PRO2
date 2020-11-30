@@ -64,5 +64,5 @@ void Cjt_Contenidors::print_contenedores() const{
         it->second.ubic().print();
         cout << "," << it->second.longitud() <<')' << endl;
     }
-    cout << endl;
+    
 }

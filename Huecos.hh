@@ -56,7 +56,7 @@ void actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera);
       \pre <em>Cert</em>
       \post S'ha actualitzat el mapa 
 */
-void actualiza_huecos_borrar(vector<Segmento> huecos_hilera);
+void actualiza_huecos_borrar(vector<Segmento> huecos_hilera,int hilera);
 
 
 //Operador
