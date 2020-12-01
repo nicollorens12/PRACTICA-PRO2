@@ -44,7 +44,6 @@ void Area_Magatzem::huecos_hilera(vector<Segmento>& v_huecos,int hilera) const{
 
 
 void Area_Magatzem::inserta_contenedor(string m, int l, Ubicacion u,Huecos& huec){
-      Contenedor c(m,l);
       if (u.hilera() != -1) v[u.hilera()].modifica_hilera(u.plaza(),u.piso(),m,l);
       actualiza_huecos_insertar(Segmento(u,l),huec);
       
@@ -241,12 +240,20 @@ void Area_Magatzem::actualiza_huecos_insertar(Segmento s,Huecos& huec){
             Segmento izq_arriba = distancia_prox_c_izq(Segmento(aux,s.longitud()));
             Segmento der_arriba = distancia_prox_c_derecha(Segmento(aux,s.longitud()));
             if(izq_arriba.longitud() > 0 and der_arriba.longitud() > 0){ //inserto entre dos contenedores sale solo un hueco grande
+                  huec.borra_hueco(huec.segmento_a_clau(izq_arriba).first);
+                  huec.borra_hueco(huec.segmento_a_clau(der_arriba).first);
                   arriba = Segmento(izq_arriba.ubic(),izq_arriba.longitud()+s.longitud()+der_arriba.longitud());
             }
             else if(izq_arriba.longitud() > 0){ // der_arriba.longitud() > 0 = falso ya que no se ha cumplido la anterior
+                  huec.borra_hueco(huec.segmento_a_clau(izq_arriba).first);
                   arriba = Segmento(izq_arriba.ubic(),izq_arriba.longitud()+s.longitud());
             }
+            else if(der_arriba.longitud() > 0){
+                  huec.borra_hueco(huec.segmento_a_clau(der_arriba).first);
+                  arriba = Segmento(aux,s.longitud()+der_arriba.longitud());
+            }
             else{
+                  huec.borra_hueco(huec.segmento_a_clau(Segmento(aux,s.longitud())).first);
                   arriba = Segmento(aux,s.longitud());
             }
 

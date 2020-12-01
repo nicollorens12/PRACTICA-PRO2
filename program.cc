@@ -48,12 +48,8 @@ int main(){
                     u.print();
                     cout << endl;
                     area.inserta_contenedor(matricula,l,u,huec);
-                    /*Segmento s(u,l);
+                    Segmento s(u,l);
                     contenidor.inserta_contenedor(matricula,s);
-                    vector<Segmento> v_huecos;
-                    area.huecos(v_huecos);
-                    huec.renueva_huecos(v_huecos);
-                    */
                     area.inserta_contenidors_en_espera(huec,contenidor);
                 }
                 
