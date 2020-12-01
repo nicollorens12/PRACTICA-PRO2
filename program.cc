@@ -52,9 +52,7 @@ int main(){
                     contenidor.inserta_contenedor(matricula,s);
                     area.inserta_contenidors_en_espera(huec,contenidor);
                 }
-                
             }
-
             else cout << "error: el contenedor ya existe" << endl;
             
         }
@@ -65,8 +63,7 @@ int main(){
             cout << " " << matricula << endl;
             Segmento s = contenidor.consulta_contenidor(matricula);
 
-            if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){ //ESTA EN EL AREA DE ESPERA??
-              
+            if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){ //COMPROBACION SI ESTA EN EL AREA DE ESPERA
                 area.retira_contenedor_area_espera(matricula,contenidor.consulta_contenidor(matricula).longitud());
                 contenidor.retira_contenidor_cjt(matricula);
             }

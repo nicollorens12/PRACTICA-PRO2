@@ -68,7 +68,9 @@ void Huecos::renueva_huecos(vector<Segmento> huecos){
 }
 
 void Huecos::borra_hueco(Clau c){
-    huec.erase(c);
+    map<Clau,int>::iterator it = huec.find(c);
+    if(it != huec.end()) huec.erase(it);
+    
 }
 
 void Huecos::inserta_hueco(pair<Clau,int> p){

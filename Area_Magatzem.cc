@@ -164,31 +164,35 @@ void Area_Magatzem::actualiza_huecos_borrar(Segmento s,Huecos& huec){
             Segmento izq_arriba = distancia_prox_c_izq(Segmento(aux,s.longitud()));
             Segmento der_arriba = distancia_prox_c_derecha(Segmento(aux,s.longitud()));
 
-            if((not izq_v and izq_arriba.longitud() == 0) or izq_v){ // HUECO ENCIMA A LA DERECHA (UNICO HUECO QUE SE PUEDE CONSEGUIR)
+            if(not derecha_v and not izq_v and izq_arriba.longitud() > 0 and der_arriba.longitud() >0){
+                  //cout << "FLAG1" << endl;
+                  huec_arriba1 = izq_arriba;
+                  huec_arriba2 = der_arriba;
+                  int longitud = izq_arriba.longitud() + s.longitud() + der_arriba.longitud();
+                  huec.borra_hueco(huec.segmento_a_clau(Segmento(izq_arriba.ubic(),longitud)).first);
+            }
+            else if((not izq_v and izq_arriba.longitud() == 0) or izq_v){ // HUECO ENCIMA A LA DERECHA 
+                  //cout << "FLAG2" << endl;
                   if(der_arriba.longitud() > 0){
                         Ubicacion aux_derecha(aux.hilera(),aux.plaza()+s.longitud(),aux.piso());
                         huec_arriba1 = der_arriba;
                         huec.borra_hueco(huec.segmento_a_clau(Segmento(aux,s.longitud()+der_arriba.longitud())).first);
                   }
             }
-            else if((not derecha_v and der_arriba.longitud() == 0) or derecha_v){ // HUECO ENCIMA A LA IZQUIERDA (UNICO HUECO QUE SE PUEDE CONSEGUIR)
+            else if((not derecha_v and der_arriba.longitud() == 0) or derecha_v){ // HUECO ENCIMA A LA IZQUIERDA
+                  //cout << "FLAG3" << endl;
                   if(izq_arriba.longitud() > 0){
                         huec_arriba1 = izq_arriba;
                         huec.borra_hueco(huec.segmento_a_clau(Segmento(izq_arriba.ubic(),izq_arriba.longitud()+s.longitud())).first);
                   }
             }
-            else if(not derecha_v and not izq_v and izq_arriba.longitud() > 0 and der_arriba.longitud() >0){
-                  huec_arriba1 = izq_arriba;
-                  huec_arriba2 = der_arriba;
-                  int longitud = izq_arriba.longitud() + s.longitud() + der_arriba.longitud();
-                  huec.borra_hueco(huec.segmento_a_clau(Segmento(izq_arriba.ubic(),longitud)).first);
-            }
+            
             
       }
       huec.borra_hueco(huec.segmento_a_clau(Segmento(aux,s.longitud())).first);
       huec.inserta_hueco(huec.segmento_a_clau(huec_abajo));
       if(huec_arriba1.longitud() > 0) huec.inserta_hueco(huec.segmento_a_clau(huec_arriba1));
-      else if(huec_arriba2.longitud() > 0) huec.inserta_hueco(huec.segmento_a_clau(huec_arriba2));
+      if(huec_arriba2.longitud() > 0) huec.inserta_hueco(huec.segmento_a_clau(huec_arriba2));
 
 }
 
