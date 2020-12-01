@@ -45,7 +45,7 @@ void inserta_a_espera(Contenedor c);
       \pre <em>Cert</em>
       \post S'ha retirat un contenidor de la llista i retornat un iterador al seguent element
 */
-list<Contenedor>::iterator retira_a_espera(list<Contenedor>::iterator);
+void retira_a_espera(list<Contenedor>::iterator);
 
 /** @brief Retira un contenidor del area de espera
       \pre <em>Cert</em>

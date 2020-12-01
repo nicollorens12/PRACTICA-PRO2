@@ -65,7 +65,7 @@ void Area_Magatzem::borra_encima_afegeix_a_espera(Segmento s,Cjt_Contenidors& cj
       int hilera = s.ubic().hilera();
 
       for(int i = plaza; i < plaza + s.longitud(); ++i){
-            if(not v[hilera].elemen_pos(i,piso+1).empty()){ //MIRA SI EL CONTENEDOR QUE ESTOY MIRANDO DE ARRIBA ENCIMA TIENE OTRO MAS
+            if(piso+1 < h and not v[hilera].elemen_pos(i,piso+1).empty()){ //MIRA SI EL CONTENEDOR QUE ESTOY MIRANDO DE ARRIBA ENCIMA TIENE OTRO MAS
                   if(piso + 2 < h){ 
                         Segmento aux = cjt.consulta_contenidor(v[hilera].elemen_pos(i,piso+1));
                         borra_encima_afegeix_a_espera(aux,cjt);
@@ -73,13 +73,18 @@ void Area_Magatzem::borra_encima_afegeix_a_espera(Segmento s,Cjt_Contenidors& cj
                   else{
                         Segmento aux = cjt.consulta_contenidor(v[hilera].elemen_pos(i,piso+1));
                         a_espera.inserta_a_espera(Contenedor(v[hilera].elemen_pos(i,piso+1),aux.longitud()));
+                        Segmento aux_espera(Ubicacion(-1,0,0),aux.longitud());
+                        cjt.modifica_contenidor_cjt(v[hilera].elemen_pos(i,piso+1),aux_espera);
                         borra_contenidor(aux);
+                        
                   }
             }
       }
 
       Contenedor c(v[s.ubic().hilera()].elemen_pos(plaza,piso),s.longitud());
       a_espera.inserta_a_espera(c);
+      Segmento aux_espera(Ubicacion(-1,0,0),s.longitud());
+      cjt.modifica_contenidor_cjt(v[hilera].elemen_pos(plaza,piso),aux_espera);
       borra_contenidor(s);
 }
 
@@ -98,27 +103,6 @@ void Area_Magatzem::retira_contenidor(Segmento s,Cjt_Contenidors& cjt){
       }
 
       borra_contenidor(s);
-      
-      /*
-      for(int j = piso+1; j < h; ++j){
-            for(int i = s.ubic().plaza(); i < lim; ++i){
-
-                  if(i == s.ubic().plaza() and piso == j){
-                        v[hilera].borra_contenidor_hilera(s);
-                  }
-
-                  else if(not v[hilera].elemen_pos(i,j).empty()){
-                        Segmento s = cjt.consulta_contenidor(v[hilera].elemen_pos(i,j));
-                        if(j < h -1) borra_encima_afegeix_a_espera(s,cjt);
-                        else{
-                              a_espera.inserta_a_espera(Contenedor(v[hilera].elemen_pos(i,j),s.longitud()));
-                              borra_contenidor(s);
-                              
-                        }
-                  }
-            }
-      }
-      */
   
 }
 
@@ -134,12 +118,13 @@ void Area_Magatzem::inserta_contenidors_en_espera(Huecos& huec, Cjt_Contenidors&
             
             if(u.hilera() != -1){
                   inserta_contenedor(matricula,l,u);
-                  it = a_espera.retira_a_espera(it); //Inutil apuntar al siguiente elemento si vuelvo al principio
+                  a_espera.retira_a_espera(it); //Inutil apuntar al siguiente elemento si vuelvo al principio
                   Segmento s(u,l);
                   cjt.modifica_contenidor_cjt(matricula,s);
                   vector<Segmento> v_huecos;
                   huecos(v_huecos);
-                  huec.actualiza_huecos_borrar(v_huecos,u.hilera());
+                  //huec.actualiza_huecos_borrar(v_huecos,u.hilera());
+                  huec.renueva_huecos(v_huecos);
                   it = a_espera.inici();
             }
             else ++it;        

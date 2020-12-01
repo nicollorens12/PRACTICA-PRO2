@@ -211,6 +211,14 @@ void Huecos::actualiza_huecos_borrar(vector<Segmento> huecos_hilera, int hilera)
 
 }
 
+void Huecos::renueva_huecos(vector<Segmento> huecos){
+    huec.clear();
+    int size = huecos.size();
+    for(int i = 0; i < size; ++i){
+        huec.insert(segmento_a_clau(huecos[i]));
+    }
+}
+
 int Huecos::tamany(){
     return huec.size();
 }

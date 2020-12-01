@@ -102,9 +102,12 @@ void Hilera::huecos_hilera(int n,vector<Segmento>& v) const{
                   u = Ubicacion();
                   
             }
+            
       }
 
 }
+
+
 
 void Hilera::print_pos(int x, int y){
       

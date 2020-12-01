@@ -58,7 +58,8 @@ int main(){
                         cout << endl;
                     }
                     */
-                    huec.actualiza_huecos_insertar(v_huecos,u.hilera());
+                    huec.renueva_huecos(v_huecos);
+                    //huec.actualiza_huecos_insertar(v_huecos,u.hilera());
                     area.inserta_contenidors_en_espera(huec,contenidor);
                 }
                 
@@ -77,15 +78,16 @@ int main(){
             if(s.ubic().hilera() == -1 and s.ubic().plaza() == 0 and s.ubic().piso() == 0){ //ESTA EN EL AREA DE ESPERA??
               
                 area.retira_contenedor_area_espera(matricula,contenidor.consulta_contenidor(matricula).longitud());
-       
                 contenidor.retira_contenidor_cjt(matricula);
             }
 
             else if(s.ubic().plaza() != -1){
-                area.retira_contenidor(s,contenidor);
-                vector<Segmento> v_huecos;
-                area.huecos_hilera(v_huecos,s.ubic().hilera());
-                huec.actualiza_huecos_borrar(v_huecos,s.ubic().hilera());
+
+                area.retira_contenidor(s,contenidor); //SOLO CAMBIAMOS HUECOS DE LA HILERA CON LA QUE TRABAJAMOS PERO SI ANADIMOS ALGO EN OTRA HILERA DEL A ESPERA QUE??
+                vector<Segmento> v_huecos;  //RECALCULAMOS TODO PERO SIGUE SIN IR, DETECTA UN HUECO QUE NO TOCA, mira huecos_hilera (aux de funcion huecos del area(abajo))
+                area.huecos(v_huecos);
+                huec.renueva_huecos(v_huecos);          
+                //huec.actualiza_huecos_borrar(v_huecos,s.ubic().hilera());
                 area.inserta_contenidors_en_espera(huec,contenidor);
                 contenidor.retira_contenidor_cjt(matricula);
                 

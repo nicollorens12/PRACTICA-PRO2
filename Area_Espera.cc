@@ -13,8 +13,8 @@ void Area_Espera::inserta_a_espera(Contenedor c){
     l_espera.push_front(c);
 }
 
-list<Contenedor>::iterator Area_Espera::retira_a_espera(list<Contenedor>::iterator it){
-    return l_espera.erase(it);
+void Area_Espera::retira_a_espera(list<Contenedor>::iterator it){
+    l_espera.erase(it);
 }
 
 void Area_Espera::retira_elem_a_espera(Contenedor c){

@@ -58,6 +58,11 @@ void actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera);
 */
 void actualiza_huecos_borrar(vector<Segmento> huecos_hilera,int hilera);
 
+/** @brief Actualitza el mapa del forats al complert
+      \pre <em>Cert</em>
+      \post S'ha actualitzat el mapa 
+*/
+void renueva_huecos(vector<Segmento> huecos);
 
 //Operador
 
