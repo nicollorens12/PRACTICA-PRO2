@@ -46,23 +46,25 @@ pair<Clau,int> segmento_a_clau(Segmento s);
 
 //Modificadora
 
-/** @brief Actualitza el mapa del forats despres de afegir un contenidor
-      \pre <em>Cert</em>
-      \post S'ha actualitzat el mapa 
-*/
-void actualiza_huecos_insertar(vector<Segmento> huecos_hilera,int hilera);
-
-/** @brief Actualitza el mapa del forats despres de eliminar un contenidor
-      \pre <em>Cert</em>
-      \post S'ha actualitzat el mapa 
-*/
-void actualiza_huecos_borrar(vector<Segmento> huecos_hilera,int hilera);
-
 /** @brief Actualitza el mapa del forats al complert
       \pre <em>Cert</em>
       \post S'ha actualitzat el mapa 
 */
 void renueva_huecos(vector<Segmento> huecos);
+
+/** @brief Borra un forat del mapa
+      \pre <em>Cert</em>
+      \post S'ha actualitzat el mapa 
+*/
+void borra_hueco(Clau c);
+
+/** @brief Inserta un forat del mapa
+      \pre <em>Cert</em>
+      \post S'ha actualitzat el mapa 
+*/
+void inserta_hueco(pair<Clau,int> p);
+
+
 
 //Operador
 

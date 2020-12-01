@@ -26,7 +26,9 @@ vector <Hilera> v;
 Area_Espera a_espera;
 
 void borra_contenidor(Segmento s); //Esborra sense mirar si esta enterrat (aux de retira_contenidor)
-void borra_encima_afegeix_a_espera(Segmento s,Cjt_Contenidors& cjt);
+void borra_encima_afegeix_a_espera(Segmento s,Cjt_Contenidors& cjt,Huecos& huec);
+Segmento distancia_prox_c_izq(Segmento s);
+Segmento distancia_prox_c_derecha(Segmento s);
 
 public:
 
@@ -100,7 +102,7 @@ void print_area_espera() const;
       \pre <em>Cert</em>
       \post El contenidor s'ha afegit al cjt i a la matriu/llista i 
 */
-void inserta_contenedor(string m, int l, Ubicacion u); 
+void inserta_contenedor(string m, int l, Ubicacion u,Huecos& huec); 
 
 /** @brief Inserta un contenidor al area de espera
       \pre <em>Cert</em>
@@ -118,13 +120,27 @@ void retira_contenedor_area_espera(string m, int l);
       \pre <em>Cert</em>
       \post Si el contenidor no existeix al terminal s'imprimeix error altrament el contenidor es borrat del terminal
 */
-void retira_contenidor(Segmento s,Cjt_Contenidors& cjt);
+void retira_contenidor(Segmento s,Cjt_Contenidors& cjt, Huecos& huec);
 
 /** @brief Inserta tots els contidors que es pugui del area d'espera
       \pre <em>Cert</em>
       \post S'han insertat els contenidors que hi cabien del area d'espera al area de magatzem
 **/
 void inserta_contenidors_en_espera(Huecos& huec,Cjt_Contenidors& cjt);
+
+/** @brief Actualitza els forats del conjunt Huec que han estat modificats al retirar un contenidor (Utilitza parametres implicits de la clase Area_Magatzem)
+ *          (Es modifica part del parametre implicit de la clase Huecos nomes amb consultes mai directament)
+      \pre <em>Cert</em>
+      \post S'han actualitzat el mapa dels forats 
+**/
+void actualiza_huecos_borrar(Segmento s,Huecos& huec);
+
+/** @brief Actualitza els forats del conjunt Huec que han estat modificats al retirar un contenidor (Utilitza parametres implicits de la clase Area_Magatzem)
+ *          (Es modifica part del parametre implicit de la clase Huecos nomes amb consultes mai directament)
+      \pre <em>Cert</em>
+      \post S'han actualitzat el mapa dels forats 
+**/
+void actualiza_huecos_insertar(Segmento s,Huecos& huec);
 
 
 

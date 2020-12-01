@@ -47,19 +47,13 @@ int main(){
                 else{
                     u.print();
                     cout << endl;
-                    area.inserta_contenedor(matricula,l,u);
-                    Segmento s(u,l);
+                    area.inserta_contenedor(matricula,l,u,huec);
+                    /*Segmento s(u,l);
                     contenidor.inserta_contenedor(matricula,s);
                     vector<Segmento> v_huecos;
                     area.huecos(v_huecos);
-                    /*cout << "ESTOS SON LOS HUECOS QUE DEVUELVE" << endl << endl;
-                    for(int i = 0; i < v_huecos.size(); ++i){
-                        v_huecos[i].print();
-                        cout << endl;
-                    }
-                    */
                     huec.renueva_huecos(v_huecos);
-                    //huec.actualiza_huecos_insertar(v_huecos,u.hilera());
+                    */
                     area.inserta_contenidors_en_espera(huec,contenidor);
                 }
                 
@@ -83,11 +77,7 @@ int main(){
 
             else if(s.ubic().plaza() != -1){
 
-                area.retira_contenidor(s,contenidor); //SOLO CAMBIAMOS HUECOS DE LA HILERA CON LA QUE TRABAJAMOS PERO SI ANADIMOS ALGO EN OTRA HILERA DEL A ESPERA QUE??
-                vector<Segmento> v_huecos;  //RECALCULAMOS TODO PERO SIGUE SIN IR, DETECTA UN HUECO QUE NO TOCA, mira huecos_hilera (aux de funcion huecos del area(abajo))
-                area.huecos(v_huecos);
-                huec.renueva_huecos(v_huecos);          
-                //huec.actualiza_huecos_borrar(v_huecos,s.ubic().hilera());
+                area.retira_contenidor(s,contenidor,huec); //SOLO CAMBIAMOS HUECOS DE LA HILERA CON LA QUE TRABAJAMOS PERO SI ANADIMOS ALGO EN OTRA HILERA DEL A ESPERA QUE??
                 area.inserta_contenidors_en_espera(huec,contenidor);
                 contenidor.retira_contenidor_cjt(matricula);
                 
